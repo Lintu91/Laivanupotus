@@ -7,6 +7,3 @@ Kummallakin pelaajalla on käytössään 10 laivaa:
 * 4 sukellusvenettä, 1 ruutu
 
 Käyttäjät: Pelaaja ja tietokone
-
-Lol uutta kamaa näkyykö?
-asdf
