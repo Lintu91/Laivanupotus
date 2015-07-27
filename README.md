@@ -9,3 +9,4 @@ Kummallakin pelaajalla on käytössään 10 laivaa:
 Käyttäjät: Pelaaja ja tietokone
 
 Lol uutta kamaa näkyykö?
+asdf
