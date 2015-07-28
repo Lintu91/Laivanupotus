@@ -3,9 +3,10 @@ package laivanupotus;
 public class Laivanupotus {
 
     public static void main(String[] args) {
+        Vastustaja vastustaja = new Vastustaja();
+        System.out.println("Hello World!");
         
-        
-        System.out.print("Hello World!");
+        vastustaja.Arpoja(); //Pelkkaa kertausta
     }
     
 }
