@@ -19,3 +19,5 @@ Kummallakin pelaajalla on käytössään **10** laivaa:
 **Tietokoneen toiminnot:**
 - Asettaa omat laivat pelilaudalle random-generaattorin avulla.
 - Valitsee randomisti vastustajan pelilaudalta pommitettavan ruudun.
+
+Uusi muokkaus laitoksen koneella. Lol. Hyvin menee.
