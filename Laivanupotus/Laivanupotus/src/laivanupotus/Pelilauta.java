@@ -1,13 +1,14 @@
 
 package laivanupotus;
+import java.util.ArrayList;
 import java.util.HashMap;
 
 public class Pelilauta {
     
-    static HashMap pelaajanKayttamatRuudut = new HashMap<String, Integer>();
-    static boolean onkoVarattu;
+    HashMap pelaajanKayttamatRuudut = new HashMap<String, ArrayList<Integer>>();
+    boolean onkoVarattu;
     
-    public static boolean OnkoPelaajanRuutuVarattu(String sarake, Integer rivi) {
+    public boolean OnkoPelaajanRuutuVarattu(String sarake, Integer rivi) {
         
         if (pelaajanKayttamatRuudut.containsKey(sarake)){
             
@@ -21,16 +22,17 @@ public class Pelilauta {
         return false;
     }
     
-     public static void VaraaTilaa(Integer ruutumaara, String suunta) {
+     public void VaraaTilaa(Pelaaja pelaaja, Integer ruutumaara, String suunta) {
          
-         String kirjain = Laivanupotus.getKirjain();
-         int numero = Laivanupotus.getNumero();
+         String kirjaimet = "ABCDEFGHIJKL";
+         String kirjain = pelaaja.getKirjain();
+         int numero = pelaaja.getNumero();
          
          if (suunta.equals("V")) {
              
-             for (int i = 0; i < ruutumaara; i++) {
+             for (int i = ruutumaara-1; i >= 0; i--) {
                  
-             }
+             }    
          }
          
          if (suunta.equals("O")) {
@@ -48,7 +50,7 @@ public class Pelilauta {
              
          }
          
-         if (suunta.equals("V")) {
+         if (suunta.equals("A")) {
              
              for (int i = 0; i < ruutumaara; i++) {
                  
