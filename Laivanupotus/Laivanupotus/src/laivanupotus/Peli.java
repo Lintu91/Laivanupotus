@@ -3,43 +3,50 @@ package laivanupotus;
 import java.util.Scanner;
 
 public class Peli {
-    private Pelaaja pelaaja = new Pelaaja();
+    private Pelaaja pelaaja1 = new Pelaaja();
+    private Pelaaja pelaaja2 = new Pelaaja();
     Scanner lukija = new Scanner(System.in);
-    Pelilauta pelilauta = new Pelilauta();
+    Pelilauta pelilauta1 = new Pelilauta();
+    Pelilauta pelilauta2 =  new Pelilauta();
     
     String valittuKirjain;
     int valittuNumero;
+    Kayttoliittyma kayttoliittyma = new Kayttoliittyma();
         
     public void AloitaPeli(){
             
         System.out.println("Tervetuloa pelaamaan Laivanupotusta!");
         System.out.println("Pelaaja, aseta laivasi ruudulle!");
         System.out.println("Asetetaan ensin pelin coolein alus, Lentotukialus!");
-        valittuKirjain = pelaaja.KyseleSarake();
-        valittuNumero = pelaaja.KyseleRivi();
+        valittuKirjain = kayttoliittyma.KyseleSarake();
+        valittuNumero = kayttoliittyma.KyseleRivi();
         
-        while (pelilauta.OnkoPelaajanRuutuVarattu(valittuKirjain, valittuNumero)==true) {
+        while (pelilauta1.OnkoRuutuVarattu(valittuKirjain, valittuNumero)==true) {
             System.out.println("Kyseinen ruutu on jo varattu, valitse uusiksi!");
-            valittuKirjain = pelaaja.KyseleSarake();
-            valittuNumero = pelaaja.KyseleRivi();
+            valittuKirjain = kayttoliittyma.KyseleSarake();
+            valittuNumero = kayttoliittyma.KyseleRivi();
         }
         
-        pelaaja.setKirjainJaNumero(valittuKirjain, valittuNumero);
+        pelaaja1.setKirjainJaNumero(valittuKirjain, valittuNumero);
         System.out.println("Valitsit ruudun " + valittuKirjain + valittuNumero);
         System.out.println("Mihin suuntaan haluat laivan? V=vasen, O=oikea, Y=ylös, A=alas");
         String suunta = lukija.nextLine();
-        pelilauta.VaraaTilaa(pelaaja, 4, suunta);
+        while (pelilauta1.VaraaTilaa(pelaaja1.getKirjain(), pelaaja1.getNumero(), 4, suunta)==false){
+            System.out.println("Ei kelpaa, Valitse uusi suunta: ");
+            suunta = lukija.nextLine();
+        }
+        
         
         System.out.println("Seuraavaksi asetetaan kaksi Risteilijää!");
-        valittuKirjain = pelaaja.KyseleSarake();
-        valittuNumero = pelaaja.KyseleRivi();
+        valittuKirjain = kayttoliittyma.KyseleSarake();
+        valittuNumero = kayttoliittyma.KyseleRivi();
         
         System.out.println("Kolme Hävittäjää kiitos!");
-        valittuKirjain = pelaaja.KyseleSarake();
-        valittuNumero = pelaaja.KyseleRivi();
+        valittuKirjain = kayttoliittyma.KyseleSarake();
+        valittuNumero = kayttoliittyma.KyseleRivi();
         
         System.out.println("Lopuksi asetetaan neljä Sukellusvenettä!");
-        valittuKirjain = pelaaja.KyseleSarake();
-        valittuNumero = pelaaja.KyseleRivi();
+        valittuKirjain = kayttoliittyma.KyseleSarake();
+        valittuNumero = kayttoliittyma.KyseleRivi();
     }
 }
