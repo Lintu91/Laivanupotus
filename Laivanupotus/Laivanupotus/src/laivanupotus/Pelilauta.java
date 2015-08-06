@@ -6,20 +6,27 @@ import java.util.HashMap;
 public class Pelilauta {
     boolean[][] ruudut = new boolean[10][10];
     
-    public boolean OnkoRuutuVarattu(String sarake, Integer rivi) {
+    public boolean onkoRuutuVarattu(String sarake, Integer rivi) { //Tarkistaa onko ruutu varattu
+        
         String kirjaimet = "ABCDEFGHIJKL";
         int indeksi = kirjaimet.indexOf(sarake);
         return ruudut[rivi][indeksi];
+        
     }
-    public boolean OnkoRuutuVarattu(Integer sarake, Integer rivi){
+    
+    public boolean onkoRuutuVarattu(Integer sarake, Integer rivi){
+        
         return ruudut[rivi] [sarake];
+        
     }
     
-    public void VaraaRuutu(int sarake, int rivi) {
+    public void varaaRuutu(int sarake, int rivi) {
+        
         ruudut[rivi][sarake] = true;
+        
     }
     
-     public boolean VaraaTilaa(String kirjain, int numero, Integer ruutumaara, String suunta) {
+     public boolean varaaTilaa(String kirjain, int numero, Integer ruutumaara, String suunta) {
          
          String kirjaimet = "ABCDEFGHIJKL";
          int sarake = kirjaimet.indexOf(kirjain);
@@ -29,44 +36,85 @@ public class Pelilauta {
                  return false;
              }
              
-             for (int i = 0; i < ruutumaara-1; i++) {
+             for (int i = 0; i < ruutumaara; i++) {
                  
                  int nykyinenSarake = sarake-i;
                  
-                 if (OnkoRuutuVarattu(nykyinenSarake, numero)){
+                 if (onkoRuutuVarattu(nykyinenSarake, numero)){
                      return false;
                  }
              }
-             for (int i = 0; i < ruutumaara-1; i++) {
+             for (int i = 0; i < ruutumaara; i++) {
                  
                  int nykyinenSarake = sarake-i;
-                 VaraaRuutu(nykyinenSarake, numero);
+                 varaaRuutu(nykyinenSarake, numero);
              }
          }
          
          else if (suunta.equals("O")) {
-             
-             for (int i = 0; i < ruutumaara; i++) {
+             if (sarake + ruutumaara > 10) {
+                 
+                 return false;
                  
              }
+             for (int i = 0; i < ruutumaara; i++) {
+                 int nykyinenSarake=sarake+1;
+                 if (onkoRuutuVarattu(nykyinenSarake, numero)){
+                     return false;
+                 }
+                 
+             }
+             for (int i = 0; i < ruutumaara; i++) {
+                 int nykyinenSarake = sarake + i;
+                 varaaRuutu(nykyinenSarake,numero);
+             }
+             
          }
-         
          else if (suunta.equals("Y")) {
+             
+             if (numero - ruutumaara < 0) {
+                 return false;
+             }
              
              for (int i = 0; i < ruutumaara; i++) {
                  
+                 int nykyinenRivi = numero-i;
+                 
+                 if (onkoRuutuVarattu(nykyinenRivi, numero)){
+                     return false;
+                 }
+             }
+             for (int i = 0; i < ruutumaara; i++) {
+                 
+                 int nykyinenRivi = sarake-i;
+                 varaaRuutu(nykyinenRivi, numero);
              }
              
          }
          
          else if (suunta.equals("A")) {
              
+             if (numero + ruutumaara > 10) {
+                 return false;
+             }
+             
              for (int i = 0; i < ruutumaara; i++) {
                  
+                 int nykyinenRivi = numero+i;
+                 
+                 if (onkoRuutuVarattu(nykyinenRivi, numero)){
+                     return false;
+                 }
+             }
+             for (int i = 0; i < ruutumaara; i++) {
+                 
+                 int nykyinenRivi = numero+i;
+                 varaaRuutu(nykyinenRivi, numero);
              }
              
          }
          else{
+             
              return false;
          }
                  

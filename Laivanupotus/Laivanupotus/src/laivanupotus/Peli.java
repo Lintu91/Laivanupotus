@@ -3,8 +3,9 @@ package laivanupotus;
 import java.util.Scanner;
 
 public class Peli {
-    private Pelaaja pelaaja1 = new Pelaaja();
-    private Pelaaja pelaaja2 = new Pelaaja();
+    private Pelaaja pelaaja1;
+    private Pelaaja pelaaja2;
+    
     Scanner lukija = new Scanner(System.in);
     Pelilauta pelilauta1 = new Pelilauta();
     Pelilauta pelilauta2 =  new Pelilauta();
@@ -21,19 +22,24 @@ public class Peli {
         valittuKirjain = kayttoliittyma.KyseleSarake();
         valittuNumero = kayttoliittyma.KyseleRivi();
         
-        while (pelilauta1.OnkoRuutuVarattu(valittuKirjain, valittuNumero)==true) {
+        while (pelilauta1.onkoRuutuVarattu(valittuKirjain, valittuNumero)==true) { //nama siirtyvat varmaankin luokkaan Pelilauta
+            
             System.out.println("Kyseinen ruutu on jo varattu, valitse uusiksi!");
             valittuKirjain = kayttoliittyma.KyseleSarake();
             valittuNumero = kayttoliittyma.KyseleRivi();
+            
         }
         
         pelaaja1.setKirjainJaNumero(valittuKirjain, valittuNumero);
         System.out.println("Valitsit ruudun " + valittuKirjain + valittuNumero);
         System.out.println("Mihin suuntaan haluat laivan? V=vasen, O=oikea, Y=ylös, A=alas");
         String suunta = lukija.nextLine();
-        while (pelilauta1.VaraaTilaa(pelaaja1.getKirjain(), pelaaja1.getNumero(), 4, suunta)==false){
+        
+        while (pelilauta1.varaaTilaa(pelaaja1.getKirjain(), pelaaja1.getNumero(), 4, suunta)==false){ //Tama myos on muuttamassa joskus
+            
             System.out.println("Ei kelpaa, Valitse uusi suunta: ");
             suunta = lukija.nextLine();
+            
         }
         
         

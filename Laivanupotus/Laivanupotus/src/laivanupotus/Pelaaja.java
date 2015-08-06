@@ -11,16 +11,18 @@ public class Pelaaja {
     Scanner lukija = new Scanner(System.in);
     String nykyinenKirjain;
     int nykyinenNumero;
+    String nimi;
     
     public Pelaaja(){
         
     }
     
-    public void AsetaLaiva(){ //Asettaa laivan haluttuun ruutuun
-        
-    }
     public void Upota(){ //Jaa'a, mitakojan tama tekee...
         
+    }
+    
+    public void kysyNimi(){
+       this.nimi = lukija.nextLine();
     }
     
     public void setKirjainJaNumero(String kirjain, Integer numero) {
@@ -28,6 +30,9 @@ public class Pelaaja {
         nykyinenKirjain = kirjain;
         nykyinenNumero = numero;
         
+    }
+    public String annaNimi(){
+        return nimi;
     }
     
     public String getKirjain() {
