@@ -21,7 +21,6 @@ public class Pelaaja {
         
         nykyinenKirjain = kirjain;
         nykyinenNumero = numero;
-        
     }
   
     public String getKirjain() {

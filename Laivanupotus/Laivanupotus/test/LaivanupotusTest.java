@@ -50,13 +50,23 @@ public class LaivanupotusTest {
     }
     
     @Test
-    public void onkoTyjhaRuutuVarattu(){
+    public void tarkistaaOnkoTyjhaRuutuVarattu(){
         
         Pelilauta pelilauta = new Pelilauta();
         boolean vastaus = pelilauta.onkoRuutuVarattu("A", 9);
         
         assertEquals(false, vastaus);
         
+    }
+    
+    @Test 
+    public void eiVaraaVarattuaRuutua(){
+        
+        Pelilauta pelilauta = new Pelilauta();
+        pelilauta.varaaRuutu(9, 9);
+        boolean vastaus = pelilauta.onkoRuutuVarattu("I", 9);
+        
+        assertEquals(true, vastaus);
     }
     
     @Test

@@ -12,8 +12,20 @@ public class Laivat {
     public Laivat() {
                 
     }
-    public void Aseta(Integer pituus){ //mahdollinen laivanasetusmetodi      
-                
-    }
+  public Integer pituus(String nimi){
+      
+      if (nimi.equals("Lentotukialus")){
+          return 4;
+      }
+      else if (nimi.equals("Risteilijä")){
+          return 3;
+      }
+      else if (nimi.equals("Hävittäjä")){
+          return 2;
+      }
+      else {
+          return 1;
+      }
+  }
     
 }

@@ -6,7 +6,7 @@ import java.util.HashMap;
 public class Pelilauta {
     boolean[][] ruudut = new boolean[10][10];
     
-    public boolean onkoRuutuVarattu(String sarake, Integer rivi) { //Tarkistaa onko ruutu varattu
+    public boolean onkoRuutuVarattu(String sarake, Integer rivi) { 
         
         String kirjaimet = "ABCDEFGHIJ";
         int indeksi = kirjaimet.indexOf(sarake);
@@ -14,9 +14,9 @@ public class Pelilauta {
         
     }
     
-    public boolean onkoRuutuVarattu(Integer sarake, Integer rivi){
+    public boolean onkoRuutuVapaa(Integer sarake, Integer rivi){
         
-        return ruudut[rivi] [sarake];
+        return ruudut[rivi][sarake];
         
     }
     
@@ -40,7 +40,7 @@ public class Pelilauta {
                  
                  int nykyinenSarake = sarake-i;
                  
-                 if (onkoRuutuVarattu(nykyinenSarake, numero)){
+                 if (onkoRuutuVapaa(nykyinenSarake, numero)){
                      return false;
                  }
              }
@@ -59,7 +59,7 @@ public class Pelilauta {
              }
              for (int i = 0; i < ruutumaara; i++) {
                  int nykyinenSarake=sarake+1;
-                 if (onkoRuutuVarattu(nykyinenSarake, numero)){
+                 if (onkoRuutuVapaa(nykyinenSarake, numero)){
                      return false;
                  }
                  
@@ -80,7 +80,7 @@ public class Pelilauta {
                  
                  int nykyinenRivi = numero-i;
                  
-                 if (onkoRuutuVarattu(nykyinenRivi, numero)){
+                 if (onkoRuutuVapaa(nykyinenRivi, numero)){
                      return false;
                  }
              }
@@ -102,7 +102,7 @@ public class Pelilauta {
                  
                  int nykyinenRivi = numero+i;
                  
-                 if (onkoRuutuVarattu(nykyinenRivi, numero)){
+                 if (onkoRuutuVapaa(nykyinenRivi, numero)){
                      return false;
                  }
              }

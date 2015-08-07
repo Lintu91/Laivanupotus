@@ -5,6 +5,7 @@ import java.util.Scanner;
 public class Kayttoliittyma {
     
     Scanner lukija = new Scanner(System.in);
+    Pelaaja pelaaja1 = new Pelaaja();
     
     public String kyseleSarake() { //Kysyy pelaajalta sarakkeen
         
@@ -18,7 +19,6 @@ public class Kayttoliittyma {
             valittuKirjain = lukija.nextLine();
             
         }
-        
         return valittuKirjain;
         
     } 
@@ -28,11 +28,10 @@ public class Kayttoliittyma {
         System.out.print("Valitse rivi, välillä 1-10: ");
         int valittuNumero = Integer.parseInt(lukija.nextLine());
         
-        while ( valittuNumero < 1 || valittuNumero > 10 ) {
+        while (! (valittuNumero > 0 && valittuNumero < 11) ) {
             
             System.out.print("Valitsemasi numero ei ole pyydetyllä välillä, koitetaas uudestaan: ");
-            valittuNumero = Integer.parseInt(lukija.nextLine());
-            
+            valittuNumero = Integer.parseInt(lukija.nextLine());           
         }
         
         return valittuNumero;
