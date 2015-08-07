@@ -16,25 +16,14 @@ public class Pelaaja {
     public Pelaaja(){
         
     }
-    
-    public void Upota(){ //Jaa'a, mitakojan tama tekee...
-        
-    }
-    
-    public void kysyNimi(){
-       this.nimi = lukija.nextLine();
-    }
-    
+
     public void setKirjainJaNumero(String kirjain, Integer numero) {
         
         nykyinenKirjain = kirjain;
         nykyinenNumero = numero;
         
     }
-    public String annaNimi(){
-        return nimi;
-    }
-    
+  
     public String getKirjain() {
         
         return nykyinenKirjain;

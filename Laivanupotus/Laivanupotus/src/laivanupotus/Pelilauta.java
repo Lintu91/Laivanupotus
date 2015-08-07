@@ -8,7 +8,7 @@ public class Pelilauta {
     
     public boolean onkoRuutuVarattu(String sarake, Integer rivi) { //Tarkistaa onko ruutu varattu
         
-        String kirjaimet = "ABCDEFGHIJKL";
+        String kirjaimet = "ABCDEFGHIJ";
         int indeksi = kirjaimet.indexOf(sarake);
         return ruudut[rivi][indeksi];
         

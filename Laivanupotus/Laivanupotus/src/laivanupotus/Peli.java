@@ -19,14 +19,14 @@ public class Peli {
         System.out.println("Tervetuloa pelaamaan Laivanupotusta!");
         System.out.println("Pelaaja, aseta laivasi ruudulle!");
         System.out.println("Asetetaan ensin pelin coolein alus, Lentotukialus!");
-        valittuKirjain = kayttoliittyma.KyseleSarake();
-        valittuNumero = kayttoliittyma.KyseleRivi();
+        valittuKirjain = kayttoliittyma.kyseleSarake();
+        valittuNumero = kayttoliittyma.kyseleRivi();
         
         while (pelilauta1.onkoRuutuVarattu(valittuKirjain, valittuNumero)==true) { //nama siirtyvat varmaankin luokkaan Pelilauta
             
             System.out.println("Kyseinen ruutu on jo varattu, valitse uusiksi!");
-            valittuKirjain = kayttoliittyma.KyseleSarake();
-            valittuNumero = kayttoliittyma.KyseleRivi();
+            valittuKirjain = kayttoliittyma.kyseleSarake();
+            valittuNumero = kayttoliittyma.kyseleRivi();
             
         }
         
@@ -44,15 +44,15 @@ public class Peli {
         
         
         System.out.println("Seuraavaksi asetetaan kaksi Risteilijää!");
-        valittuKirjain = kayttoliittyma.KyseleSarake();
-        valittuNumero = kayttoliittyma.KyseleRivi();
+        valittuKirjain = kayttoliittyma.kyseleSarake();
+        valittuNumero = kayttoliittyma.kyseleRivi();
         
         System.out.println("Kolme Hävittäjää kiitos!");
-        valittuKirjain = kayttoliittyma.KyseleSarake();
-        valittuNumero = kayttoliittyma.KyseleRivi();
+        valittuKirjain = kayttoliittyma.kyseleSarake();
+        valittuNumero = kayttoliittyma.kyseleRivi();
         
         System.out.println("Lopuksi asetetaan neljä Sukellusvenettä!");
-        valittuKirjain = kayttoliittyma.KyseleSarake();
-        valittuNumero = kayttoliittyma.KyseleRivi();
+        valittuKirjain = kayttoliittyma.kyseleSarake();
+        valittuNumero = kayttoliittyma.kyseleRivi();
     }
 }
