@@ -1,6 +1,8 @@
 
 import laivanupotus.Pelaaja;
 import laivanupotus.Pelilauta;
+import laivanupotus.Logiikka;
+import laivanupotus.Laivat;
 import org.junit.After;
 import org.junit.AfterClass;
 import org.junit.Before;
@@ -59,40 +61,11 @@ public class LaivanupotusTest {
         
     }
     
-    @Test 
-    public void eiVaraaVarattuaRuutua(){
-        
-        Pelilauta pelilauta = new Pelilauta();
-        pelilauta.varaaRuutu(9, 9);
-        boolean vastaus = pelilauta.onkoRuutuVarattu("I", 9);
-        
-        assertEquals(true, vastaus);
-    }
-    
-    @Test
-    public void eiVaraaTilaaJosVasemmallaEiOleTilaa(){
-        
-        Pelilauta pelilauta = new Pelilauta();
-        boolean vastaus = pelilauta.varaaTilaa("A", 9, 4, "V");
-        
-        assertEquals(false, vastaus);
-    }
-    
-    @Test
-    public void varaaTilaaJosVasemmallaTilaa(){
-        
-        Pelilauta pelilauta = new Pelilauta();
-        boolean vastaus = pelilauta.varaaTilaa("I", 4, 4, "V");
-        
-        
-        assertEquals(true, vastaus);
-    }
-    
     @Test
     public void eiVaraaTilaaJosOikeallaEiOleTilaa(){
         
         Pelilauta pelilauta = new Pelilauta();
-        boolean vastaus = pelilauta.varaaTilaa("J", 9, 4, "O");
+        boolean vastaus = pelilauta.varaaTilaaOikealle(9, 4, 2);
         
         assertEquals(false, vastaus);
         
@@ -102,7 +75,7 @@ public class LaivanupotusTest {
     public void varaaTilaaJosOikeallaOnTilaa(){
         
         Pelilauta pelilauta = new Pelilauta();
-        boolean vastaus = pelilauta.varaaTilaa("A", 9, 4, "O");
+        boolean vastaus = pelilauta.varaaTilaaOikealle(1, 4, 2);
         
         assertEquals(true, vastaus);
         
@@ -112,7 +85,7 @@ public class LaivanupotusTest {
     public void eiVaraaTilaaJosYlhaallaEiOleTilaa(){
         
         Pelilauta peilauta = new Pelilauta();
-        boolean vastaus = peilauta.varaaTilaa("A", 1, 4, "Y");
+        boolean vastaus = peilauta.varaaTilaaYlos(9, 1, 4);
         
         assertEquals(false, vastaus);
         
@@ -122,7 +95,7 @@ public class LaivanupotusTest {
     public void varaaTilaaJosYlhaallaOnTilaa(){
         
         Pelilauta pelilauta = new Pelilauta();
-        boolean vastaus = pelilauta.varaaTilaa("E", 4, 4, "Y");
+        boolean vastaus = pelilauta.varaaTilaaYlos(9, 9, 2);
         
         assertEquals(true, vastaus);
         
@@ -132,7 +105,7 @@ public class LaivanupotusTest {
     public void eiVaraaTilaaJosAlhaallaEiOleTilaa(){
         
         Pelilauta pelilauta = new Pelilauta();
-        boolean vastaus = pelilauta.varaaTilaa("J", 10, 4, "A");
+        boolean vastaus = pelilauta.varaaTilaaAlas(9, 9, 4);
         
         assertEquals(false, vastaus);
         
@@ -142,9 +115,46 @@ public class LaivanupotusTest {
     public void varaaTilaaJosAlhaallaOTilaa(){
         
         Pelilauta pelilauta = new Pelilauta();
-        boolean vastaus = pelilauta.varaaTilaa("J", 1, 4, "A");
+        boolean vastaus = pelilauta.varaaTilaaAlas(1, 1, 1);
         
         assertEquals(true, vastaus);
+    }
+    
+    @Test 
+    public void varaaTilaaJosVasemmallaOnTilaa(){
+        
+        Pelilauta pelilauta = new Pelilauta();
+        boolean vastaus = pelilauta.varaaTilaaVasemmalle(7, 1, 4);
+        
+        assertEquals(true, vastaus);
+    }
+    
+    @Test
+    public void eiVaraaTilaaJosVasemmallaEiOleTilaa(){
+        
+        Pelilauta pelilauta = new Pelilauta();
+        boolean vastaus = pelilauta.varaaTilaaVasemmalle(1, 3, 4);
+        
+        assertEquals(false, vastaus);
+    }
+    
+    @Test
+    public void asettaaPelaajanNimenOikein(){
+        
+        Pelaaja pelaaja = new Pelaaja();
+        pelaaja.setNimi("Pelaaja");
+        String vastaus = pelaaja.getNimi();
+        
+        assertEquals("Pelaaja", vastaus);
+    }
+    
+    @Test
+    public void laivojenNimetVastaavatPituutta(){
+        
+        Laivat laivat = new Laivat();
+        String vastaus = laivat.getNimi(4) + ", " + laivat.getNimi(3)+ ", " + laivat.getNimi(2) + ", " + laivat.getNimi(1) + ".";
+        
+        assertEquals("Lentotukialus, Risteilijä, Hävittäjä, Sukellusvene.", vastaus);
     }
 
 }

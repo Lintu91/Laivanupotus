@@ -11,6 +11,7 @@ public class Peli {
     Scanner lukija = new Scanner(System.in);
     Pelilauta pelilauta1 = new Pelilauta();
     Pelilauta pelilauta2 = new Pelilauta();
+    Pelilauta pelilauta;
     Laivat laivat = new Laivat();
 
     String valittuKirjain;
@@ -21,6 +22,7 @@ public class Peli {
 
         pelaaja1 = new Pelaaja();
         pelaaja2 = new Pelaaja();
+        pelilauta = new Pelilauta();
 
         System.out.println("Tervetuloa pelaamaan Laivanupotusta!");
         System.out.print("Pelaaja 1, millä nimellä haluat sinua kutsuttavan? : ");
@@ -29,19 +31,25 @@ public class Peli {
         logiikka.kyseleNimi(pelaaja2);
 
         for (int i = 0; i < 2; i++) {
-            
+
             if (i == 0) {
-                    pelaaja = pelaaja1;
-                } 
-                if (i ==1) {
-                    pelaaja = pelaaja2;
-                }
-            
-            for (int j = 4; j > 0; j--) {
-                int pituus = j;
                 
-                for (int k = 4; k < j; k--) {
-                    
+                pelaaja = pelaaja1;
+                pelilauta = pelilauta1;
+            }
+            
+            if (i == 1) {
+                
+                pelaaja = pelaaja2;
+                pelilauta = pelilauta2;
+            }
+
+            for (int j = 4; j > 0; j--) {
+                
+                int pituus = j;
+
+                for (int k = 5; k > j; k--) {
+
                     System.out.println("Pelaaja " + pelaaja.getNimi() + ", aseta " + laivat.getNimi(pituus) + " ruudulle!");
 
                     valittuKirjain = logiikka.kyseleSarake();
@@ -55,15 +63,17 @@ public class Peli {
 
                     String suunta = lukija.nextLine();
 
-                    while (pelilauta1.varaaTilaa(pelaaja1.getKirjain(), pelaaja1.getNumero(), 4, suunta) == false) { //Tama on muuttamassa joskus
+                    while (pelilauta.varaaTilaa(pelaaja.getKirjain(), pelaaja.getNumero(), pituus, suunta) == false) { //Tama on muuttamassa joskus
 
-                        System.out.print("Ei kelpaa, Valitse uusi suunta: ");
+                        System.out.print("Ei kelpaa, valitse uusi suunta: ");
                         suunta = lukija.nextLine();
                     }
+                    
+                    System.out.println("Laivan asettaminen onnistui!");
                 }
 
             }
         }
 
-      
-    }}
+    }
+}

@@ -2,12 +2,6 @@ package laivanupotus;
 
 public class Laivat {
 
-    String nimi;
-    String laiva1 = "Lentotukialus";
-    String laiva2 = "Risteilija";
-    String laiva3 = "Havittaja";
-    String laiva4 = "Sukellusvene";
-
     public Laivat() {
 
     }
@@ -16,9 +10,11 @@ public class Laivat {
 
         if (pituus == 4) {
             return "Lentotukialus";
-        } else if (pituus == 3) {
+        }
+        if (pituus == 3) {
             return "Risteilijä";
-        } else if (pituus == 3) {
+        }
+        if (pituus == 2) {
             return "Hävittäjä";
         } else {
             return "Sukellusvene";

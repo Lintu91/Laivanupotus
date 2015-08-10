@@ -5,7 +5,6 @@ import java.util.Scanner;
 public class Logiikka {
     
     Scanner lukija = new Scanner(System.in);
-    Pelaaja pelaaja1 = new Pelaaja();
     Kayttoliittyma kayttoliittyma = new Kayttoliittyma();
     int laivanPituus;
     
@@ -45,4 +44,5 @@ public class Logiikka {
         
         pelaaja.setNimi(nimi);
     }
+    
 }
