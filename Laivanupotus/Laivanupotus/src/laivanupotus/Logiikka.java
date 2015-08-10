@@ -2,10 +2,12 @@
 package laivanupotus;
 import java.util.Scanner;
 
-public class Kayttoliittyma {
+public class Logiikka {
     
     Scanner lukija = new Scanner(System.in);
     Pelaaja pelaaja1 = new Pelaaja();
+    Kayttoliittyma kayttoliittyma = new Kayttoliittyma();
+    int laivanPituus;
     
     public String kyseleSarake() { //Kysyy pelaajalta sarakkeen
         
@@ -36,5 +38,11 @@ public class Kayttoliittyma {
         
         return valittuNumero;
         
+    }
+    
+    public void kyseleNimi(Pelaaja pelaaja){
+        String nimi = lukija.nextLine();
+        
+        pelaaja.setNimi(nimi);
     }
 }

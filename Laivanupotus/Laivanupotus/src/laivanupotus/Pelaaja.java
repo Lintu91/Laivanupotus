@@ -14,7 +14,6 @@ public class Pelaaja {
     String nimi;
     
     public Pelaaja(){
-        
     }
 
     public void setKirjainJaNumero(String kirjain, Integer numero) {
@@ -32,5 +31,12 @@ public class Pelaaja {
         
         return nykyinenNumero;
         
+    }
+    public void setNimi(String asetettuNimi){
+        
+        nimi=asetettuNimi;
+    }
+    public String getNimi(){
+        return nimi;
     }
 }
