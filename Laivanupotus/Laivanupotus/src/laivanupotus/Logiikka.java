@@ -45,4 +45,5 @@ public class Logiikka {
         pelaaja.setNimi(nimi);
     }
     
+    
 }

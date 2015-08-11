@@ -21,5 +21,9 @@ public class Laivat {
         }
 
     }
+    
+    public void osuma(){
+        
+    }
 
 }

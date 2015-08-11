@@ -11,21 +11,22 @@ public class Pelilauta {
     int laivanPituus;
 
     public boolean onkoRuutuVarattu(String sarake, Integer rivi) {
-        
+
         int indeksi = kirjaimet.indexOf(sarake);
-        return ruudut[rivi][indeksi];
+        indeksi++;
+        return ruudut[indeksi][rivi];
 
     }
 
     public boolean onkoRuutuVapaa(Integer sarake, Integer rivi) {
 
-        return ruudut[rivi][sarake];
+        return ruudut[sarake][rivi];
 
     }
 
     public void varaaRuutu(int sarake, int rivi) { //Varaa käsiteltävän ruudun
 
-        ruudut[rivi][sarake] = true;
+        ruudut[sarake][rivi] = true;
 
     }
 
@@ -44,28 +45,23 @@ public class Pelilauta {
                 return true;
             }
 
-        }
+        } else if (suunta.equals("O")) {
 
-        if (suunta.equals("O")) {
-            
             if (varaaTilaaOikealle(sarake, numero, pituus)) {
-                
+
                 return true;
             }
-        }
+        } else if (suunta.equals("Y")) {
 
-        else if (suunta.equals("Y")) {
-            
-            if (varaaTilaaYlos(sarake, numero, pituus)){
-                
+            if (varaaTilaaYlos(sarake, numero, pituus)) {
+
                 return true;
             }
 
-        }
-        else if (suunta.equals("A")) {
-            
-            if (varaaTilaaAlas(sarake, numero, pituus)){
-                
+        } else if (suunta.equals("A")) {
+
+            if (varaaTilaaAlas(sarake, numero, pituus)) {
+
                 return true;
             }
         }
@@ -161,5 +157,12 @@ public class Pelilauta {
         }
         return true;
     }
-    
+
+    public boolean onkoRuudullaLaiva(String sarake, Integer rivi) {
+        
+        int indeksi = kirjaimet.indexOf(sarake);
+        indeksi++;
+        return ruudut[indeksi][rivi];
+    }
+
 }

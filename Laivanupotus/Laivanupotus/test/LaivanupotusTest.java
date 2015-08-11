@@ -179,7 +179,7 @@ public class LaivanupotusTest {
     }
     
     @Test
-    public void poistaaLaivanListasta(){
+    public void poistaaLaivanListasta(){ 
         
         Laivat laiva = new Laivat();
         Pelaaja pelaaja = new Pelaaja();
@@ -189,6 +189,17 @@ public class LaivanupotusTest {
         boolean vastaus = pelaaja.viimeinenLaivaUpotettu();
         
         assertEquals(true, vastaus);
+    }
+    
+    @Test
+    public void tarkistaaOnkoRuudullaLaiva(){
+
+        Pelilauta pelilauta = new Pelilauta();
+        
+        pelilauta.varaaRuutu(4, 4);
+        boolean vastaus = pelilauta.onkoRuudullaLaiva("D", 4);
+        
+        assertEquals(true,vastaus);
     }
 
 }
