@@ -6,7 +6,7 @@ public class Laivanupotus {
     public static void main(String[] args) {
         Peli peli = new Peli();
         
-        peli.AloitaPeli();
+        peli.AloitaPeli();  //Let the game begin!
         
     }
     

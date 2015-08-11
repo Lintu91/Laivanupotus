@@ -156,5 +156,39 @@ public class LaivanupotusTest {
         
         assertEquals("Lentotukialus, Risteilijä, Hävittäjä, Sukellusvene.", vastaus);
     }
+    
+    @Test 
+    public void listaOnAluksiTyhja(){
+        
+        Pelaaja pelaaja = new Pelaaja();
+        boolean vastaus = pelaaja.viimeinenLaivaUpotettu();
+        
+        assertEquals(true, vastaus);
+    }
+    
+    @Test
+    public void lisaaLaivanListaanOikein(){
+        
+        Laivat laiva = new Laivat();
+        Pelaaja pelaaja = new Pelaaja();
+        
+        pelaaja.lisaaLaiva(laiva);
+        boolean vastaus = pelaaja.viimeinenLaivaUpotettu();
+        
+        assertEquals(false, vastaus);
+    }
+    
+    @Test
+    public void poistaaLaivanListasta(){
+        
+        Laivat laiva = new Laivat();
+        Pelaaja pelaaja = new Pelaaja();
+        
+        pelaaja.lisaaLaiva(laiva);
+        pelaaja.upotaLaiva(laiva);
+        boolean vastaus = pelaaja.viimeinenLaivaUpotettu();
+        
+        assertEquals(true, vastaus);
+    }
 
 }

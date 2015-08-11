@@ -11,7 +11,7 @@ public class Pelilauta {
     int laivanPituus;
 
     public boolean onkoRuutuVarattu(String sarake, Integer rivi) {
-
+        
         int indeksi = kirjaimet.indexOf(sarake);
         return ruudut[rivi][indeksi];
 
@@ -23,17 +23,17 @@ public class Pelilauta {
 
     }
 
-    public void varaaRuutu(int sarake, int rivi) {
+    public void varaaRuutu(int sarake, int rivi) { //Varaa käsiteltävän ruudun
 
         ruudut[rivi][sarake] = true;
 
     }
 
-    public void asetaPituus(Integer pituus) {
+    public void asetaPituus(Integer pituus) { //Pitää kirjaa käsiteltävän laivan pituudesta
         laivanPituus = pituus;
     }
 
-    public boolean varaaTilaa(String kirjain, Integer numero, Integer pituus, String suunta) { //Tulee korvaamaan osittain hirviömetodin
+    public boolean varaaTilaa(String kirjain, Integer numero, Integer pituus, String suunta) { //Varaa tilaa laivalle
 
         int sarake = kirjaimet.indexOf(kirjain);
 
@@ -73,7 +73,7 @@ public class Pelilauta {
 
     }
 
-    public boolean varaaTilaaVasemmalle(Integer sarake, Integer numero, Integer pituus) {
+    public boolean varaaTilaaVasemmalle(Integer sarake, Integer numero, Integer pituus) { //Varaa laivalle tilaa vasemmalle, jos mahdollista
 
         int laivanPituus = pituus;
 
@@ -97,7 +97,7 @@ public class Pelilauta {
         return true;
     }
 
-    public boolean varaaTilaaOikealle(Integer sarake, Integer numero, Integer pituus) {
+    public boolean varaaTilaaOikealle(Integer sarake, Integer numero, Integer pituus) { //Varaa laivalle tilaa oikealle, jos mahdollista
 
         if (sarake + pituus > 10) {
 
@@ -118,7 +118,7 @@ public class Pelilauta {
         return true;
     }
 
-    public boolean varaaTilaaYlos(Integer sarake, Integer numero, Integer pituus) {
+    public boolean varaaTilaaYlos(Integer sarake, Integer numero, Integer pituus) { //Varaa laivalle tilaa ylös, jos mahdollista
 
         if (numero - pituus < 0) {
             return false;
@@ -140,7 +140,7 @@ public class Pelilauta {
         return true;
     }
 
-    public boolean varaaTilaaAlas(Integer sarake, Integer numero, Integer pituus) {
+    public boolean varaaTilaaAlas(Integer sarake, Integer numero, Integer pituus) { //varaa laivalle tilaa alas, jos mahdollista
 
         if (numero + pituus > 10) {
             return false;

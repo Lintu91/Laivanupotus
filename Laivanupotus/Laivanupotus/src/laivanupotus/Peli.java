@@ -74,6 +74,22 @@ public class Peli {
 
             }
         }
+        
+        while (true){
+            
+            
+            if (pelaaja.viimeinenLaivaUpotettu()==true){
+                break;
+            }
+        }
+        
+        if(pelaaja1.viimeinenLaivaUpotettu()==false){
+            pelaaja = pelaaja1;
+        } else {
+            pelaaja = pelaaja2;
+        }
+        
+        System.out.println("Peli päättyi, voittaja on " + pelaaja.getNimi() + "! Onneksi olkoon!");
 
     }
 }

@@ -6,7 +6,7 @@ public class Laivat {
 
     }
 
-    public String getNimi(Integer pituus) {
+    public String getNimi(Integer pituus) { //palauttaa laivan nimen pituuden perusteella
 
         if (pituus == 4) {
             return "Lentotukialus";
