@@ -6,12 +6,11 @@ import java.util.Scanner;
 
 public class Pelaaja {
     
-    Laivat laiva = new Laivat();
-    ArrayList pelaajanLaivat = new ArrayList();
     Scanner lukija = new Scanner(System.in);
     String nykyinenKirjain;
     int nykyinenNumero;
     String nimi;
+    Pelilauta pelilauta = new Pelilauta();
     
     public Pelaaja(){
     }
@@ -40,24 +39,9 @@ public class Pelaaja {
         return nimi;
     }
     
-    public void lisaaLaiva(Laivat laiva){ //Lisää laivan pelaajan laivalistaan
+    public Pelilauta getPelilauta(){
         
-       pelaajanLaivat.add(laiva);
-    }
-    
-    public void upotaLaiva(Laivat laiva){ //Poistaa laivan pelaajan laivalistasta
-        
-        pelaajanLaivat.remove(laiva);
-    }
-    
-    public boolean viimeinenLaivaUpotettu(){ //Jos pelaajan kaikki laivat on upotettu, peli päättyy
-        
-        if (pelaajanLaivat.isEmpty()){
-            
-            return true;
-        }
-        
-        return false;
+        return pelilauta;
     }
     
 }

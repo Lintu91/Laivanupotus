@@ -26,10 +26,10 @@ public class Logiikka {
     
     public Integer kyseleRivi() { //Kysyy pelaajalta rivin
         
-        System.out.print("Valitse rivi, välillä 1-10: ");
+        System.out.print("Valitse rivi, välillä 0-9: ");
         int valittuNumero = Integer.parseInt(lukija.nextLine());
         
-        while (! (valittuNumero > 0 && valittuNumero < 11) ) {
+        while (! (valittuNumero >= 0 && valittuNumero < 10) ) {
             
             System.out.print("Valitsemasi numero ei ole pyydetyllä välillä, koitetaas uudestaan: ");
             valittuNumero = Integer.parseInt(lukija.nextLine());           

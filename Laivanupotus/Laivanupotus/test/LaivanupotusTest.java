@@ -2,7 +2,7 @@
 import laivanupotus.Pelaaja;
 import laivanupotus.Pelilauta;
 import laivanupotus.Logiikka;
-import laivanupotus.Laivat;
+import laivanupotus.Laiva;
 import org.junit.After;
 import org.junit.AfterClass;
 import org.junit.Before;
@@ -151,17 +151,14 @@ public class LaivanupotusTest {
     @Test
     public void laivojenNimetVastaavatPituutta(){
         
-        Laivat laivat = new Laivat();
-        String vastaus = laivat.getNimi(4) + ", " + laivat.getNimi(3)+ ", " + laivat.getNimi(2) + ", " + laivat.getNimi(1) + ".";
         
-        assertEquals("Lentotukialus, Risteilijä, Hävittäjä, Sukellusvene.", vastaus);
     }
     
     @Test 
     public void listaOnAluksiTyhja(){
         
         Pelaaja pelaaja = new Pelaaja();
-        boolean vastaus = pelaaja.viimeinenLaivaUpotettu();
+        boolean vastaus = pelaaja.getPelilauta().viimeinenLaivaUpotettu();
         
         assertEquals(true, vastaus);
     }
@@ -169,26 +166,13 @@ public class LaivanupotusTest {
     @Test
     public void lisaaLaivanListaanOikein(){
         
-        Laivat laiva = new Laivat();
-        Pelaaja pelaaja = new Pelaaja();
         
-        pelaaja.lisaaLaiva(laiva);
-        boolean vastaus = pelaaja.viimeinenLaivaUpotettu();
-        
-        assertEquals(false, vastaus);
     }
-    
+//    
     @Test
     public void poistaaLaivanListasta(){ 
         
-        Laivat laiva = new Laivat();
-        Pelaaja pelaaja = new Pelaaja();
         
-        pelaaja.lisaaLaiva(laiva);
-        pelaaja.upotaLaiva(laiva);
-        boolean vastaus = pelaaja.viimeinenLaivaUpotettu();
-        
-        assertEquals(true, vastaus);
     }
     
     @Test
@@ -197,9 +181,9 @@ public class LaivanupotusTest {
         Pelilauta pelilauta = new Pelilauta();
         
         pelilauta.varaaRuutu(4, 4);
-        boolean vastaus = pelilauta.onkoRuudullaLaiva("D", 4);
+        boolean vastaus = pelilauta.onkoRuutuVarattu("D", 4);
         
-        assertEquals(true,vastaus);
+        assertEquals(false,vastaus);
     }
 
 }

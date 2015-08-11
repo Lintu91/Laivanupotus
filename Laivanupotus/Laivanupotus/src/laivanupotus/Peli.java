@@ -10,10 +10,6 @@ public class Peli {
     private Pelaaja vastustaja;
 
     Scanner lukija = new Scanner(System.in);
-    Pelilauta pelilauta1 = new Pelilauta();
-    Pelilauta pelilauta2 = new Pelilauta();
-    Pelilauta pelilauta;
-    Laivat laivat = new Laivat();
 
     String valittuKirjain;
     int valittuNumero = 0;
@@ -23,7 +19,6 @@ public class Peli {
 
         pelaaja1 = new Pelaaja();
         pelaaja2 = new Pelaaja();
-        pelilauta = new Pelilauta();
 
         System.out.println("Tervetuloa pelaamaan Laivanupotusta!");
         System.out.print("Pelaaja 1, millä nimellä haluat sinua kutsuttavan? : ");
@@ -36,13 +31,11 @@ public class Peli {
             if (i == 0) {
 
                 pelaaja = pelaaja1;
-                pelilauta = pelilauta1;
             }
 
             if (i == 1) {
 
                 pelaaja = pelaaja2;
-                pelilauta = pelilauta2;
             }
 
             for (int j = 4; j > 0; j--) {
@@ -50,18 +43,29 @@ public class Peli {
                 int pituus = j;
 
                 for (int k = 5; k > j; k--) {
+                    Laiva laiva = null;
+                    if (pituus == 4) {
+                        laiva = new Laiva(4, "Lentotukialus");
+                    } else if (pituus == 3) {
+                        laiva = new Laiva(3, "Risteilijä");
+                    } else if (pituus == 2) {
+                        laiva = new Laiva(2, "Hävittäjä");
+                    } else {
+                        laiva = new Laiva(1, "Sukellusvene");
+                    }
 
-                    System.out.println("Pelaaja " + pelaaja.getNimi() + ", aseta " + laivat.getNimi(pituus) + " ruudulle!");
-                    
+                    System.out.println("Pelaaja " + pelaaja.getNimi() + ", aseta " + laiva.getNimi() + " ruudulle!");
+
                     valittuKirjain = logiikka.kyseleSarake();
                     valittuNumero = logiikka.kyseleRivi();
-                    
-                    while (pelilauta.onkoRuutuVarattu(valittuKirjain, valittuNumero)){
+
+                    while (pelaaja.getPelilauta().onkoRuutuVarattu(valittuKirjain, valittuNumero)) {
+
                         System.out.println("Valittu ruutu on varattu, valitse uudestaan!");
                         valittuKirjain = logiikka.kyseleSarake();
                         valittuNumero = logiikka.kyseleRivi();
                     }
-                    
+
                     pelaaja.setKirjainJaNumero(valittuKirjain, valittuNumero);
 
                     System.out.println("Valitsit ruudun " + pelaaja.getKirjain() + pelaaja.getNumero());
@@ -70,7 +74,7 @@ public class Peli {
 
                     String suunta = lukija.nextLine();
 
-                    while (pelilauta.varaaTilaa(pelaaja.getKirjain(), pelaaja.getNumero(), pituus, suunta) == false) { //Tama on muuttamassa joskus
+                    while (pelaaja.getPelilauta().lisaaLaiva(laiva, valittuKirjain, valittuNumero, suunta) == false) { //Tama on muuttamassa joskus
 
                         System.out.print("Ei kelpaa, valitse uusi suunta: ");
                         suunta = lukija.nextLine();
@@ -81,42 +85,44 @@ public class Peli {
 
             }
         }
-        
+
         vastustaja = new Pelaaja();
         int kierroksia = 0;
-        
+
         while (true) { //Tämä osa ei ole vielä toiminnassa
-            
-            if ((kierroksia%2)==0){
+
+            if ((kierroksia % 2) == 0) {
+
                 pelaaja = pelaaja2;
                 vastustaja = pelaaja1;
-                pelilauta = pelilauta1;
             } else {
+
                 pelaaja = pelaaja1;
                 vastustaja = pelaaja2;
-                pelilauta = pelilauta2;
             }
-            System.out.println("Pelaaja, minkä ruudun haluat upottaa?");
+
+            System.out.println("Pelaaja, mihin ruutuun haluat ampua?");
             valittuKirjain = logiikka.kyseleSarake();
             valittuNumero = logiikka.kyseleRivi();
-            if (pelilauta.onkoRuudullaLaiva(valittuKirjain, valittuNumero)){
-                
-            }
+
+            pelaaja.getPelilauta().ammuRuutuun(valittuKirjain, valittuNumero);
+
             kierroksia++;
-            
-            if (pelaaja.viimeinenLaivaUpotettu() == true) {
+
+            if (pelaaja.getPelilauta().viimeinenLaivaUpotettu() == true) {
                 break;
             }
         }
 
-        if (pelaaja1.viimeinenLaivaUpotettu() == false) {
+        if (pelaaja1.getPelilauta().viimeinenLaivaUpotettu() == false) {
+
             pelaaja = pelaaja1;
         } else {
+
             pelaaja = pelaaja2;
         }
 
         System.out.println("Peli päättyi, voittaja on " + pelaaja.getNimi() + "! Onneksi olkoon!");
         System.out.println("Pelivuoroja kertyi " + kierroksia + "kpl");
-
     }
 }
