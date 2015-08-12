@@ -30,10 +30,20 @@
             <version>3.2</version>
         </plugin>
         <plugin>
-            <groupId>org.pitest</groupId>
-            <artifactId>pitest-maven</artifactId>
-            <version>1.1.4</version>
-        </plugin>
+    <groupId>org.pitest</groupId>
+    <artifactId>pitest-maven</artifactId>
+    <version>1.1.4</version>
+    <configuration>
+        <targetClasses>
+            <param>Laivanupotus.logiikka.*</param>
+            <param>Laivanupotus.pelilauta.*</param>
+        </targetClasses>
+        <targetTests>
+            <param>Laivanupotus.Logiikka.*</param>
+            <param>Laivanupotus.Pelilauta.*</param>
+        </targetTests>
+    </configuration>
+</plugin>
     </plugins>
 </build>
 </project>
