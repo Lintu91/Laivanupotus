@@ -193,7 +193,7 @@ public class Pelilauta {
             
             Laiva laiva = pelaajanLaivat.get(i);
             
-            if(laiva.onRuudussa(indeksi, rivi)) {
+            if (laiva.onRuudussa(indeksi, rivi)) {
                 
                 laiva.osuma();
                 
@@ -202,6 +202,11 @@ public class Pelilauta {
                 }
             }
         }
+    }
+    
+    public Integer getListaSize(){
+        
+        return pelaajanLaivat.size();
     }
 
 }

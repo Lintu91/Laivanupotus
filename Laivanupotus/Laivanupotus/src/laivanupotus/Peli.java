@@ -16,7 +16,7 @@ public class Peli {
     Logiikka logiikka = new Logiikka();
 
     public void AloitaPeli() {
-
+        
         pelaaja1 = new Pelaaja();
         pelaaja2 = new Pelaaja();
 
@@ -70,7 +70,7 @@ public class Peli {
 
                     System.out.println("Valitsit ruudun " + pelaaja.getKirjain() + pelaaja.getNumero());
 
-                    System.out.print("Mihin suuntaan haluat laivan? V=vasen, O=oikea, Y=ylös, A=alas.");
+                    System.out.print("Mihin suuntaan haluat laivan? V=vasen, O=oikea, Y=ylös, A=alas: ");
 
                     String suunta = lukija.nextLine();
 

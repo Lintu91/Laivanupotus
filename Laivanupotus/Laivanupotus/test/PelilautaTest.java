@@ -1,4 +1,5 @@
 
+import laivanupotus.Laiva;
 import laivanupotus.Pelilauta;
 import org.junit.After;
 import org.junit.AfterClass;
@@ -124,5 +125,61 @@ public class PelilautaTest {
         boolean vastaus = pelilauta.onkoRuutuVarattu("D", 4);
         
         assertEquals(false,vastaus);
+    }
+    
+    @Test
+    public void lisaaLaivanJosMahdollista(){
+        
+        Pelilauta pelilauta = new Pelilauta();
+        Laiva laiva = new Laiva(3, "Risteilijä");
+        boolean vastaus = pelilauta.lisaaLaiva(laiva, "D", 3, "V");
+        
+        assertEquals(true, vastaus);
+    }
+    
+    @Test 
+    public void eiLisaaLaivaaJosEiOleMahdollista(){
+        
+        Pelilauta pelilauta = new Pelilauta();
+        Laiva laiva = new Laiva(3, "Risteilijä");
+        boolean vastaus = pelilauta.lisaaLaiva(laiva, "A", 1, "V");
+        
+        assertEquals(false, vastaus);
+    }
+    
+    @Test
+    public void eiLisaaLaivaaJosRuudussaOnLaiva(){
+        
+        Pelilauta pelilauta = new Pelilauta();
+        Laiva laiva1 = new Laiva(3, "Risteilijä");
+        pelilauta.lisaaLaiva(laiva1, "D", 3, "V");
+        Laiva laiva2 = new Laiva(3, "Risteilijä");
+        boolean vastaus = pelilauta.lisaaLaiva(laiva2, "D", 3, "V");
+        
+        assertEquals(false, vastaus);
+    }
+    
+    @Test
+    public void pelaajanLaivaSiirtyyListaan(){
+        
+        Pelilauta pelilauta = new Pelilauta();
+        Laiva laiva = new Laiva(3, "Risteilijä");
+        pelilauta.lisaaLaiva(laiva, "D", 3, "V");
+        
+        int vastaus = pelilauta.getListaSize();
+        
+        assertEquals(1, vastaus);
+    }
+    
+    @Test
+    public void sukellusveneUppoaaOikein(){
+        
+        Pelilauta pelilauta = new Pelilauta();
+        Laiva laiva = new Laiva(1, "Sukellusvene");
+        pelilauta.lisaaLaiva(laiva,  "D", 3, "V");
+        pelilauta.ammuRuutuun("D", 3);
+        int vastaus = pelilauta.getListaSize();
+        
+        assertEquals(1, vastaus);
     }
 }
