@@ -14,9 +14,11 @@ public class Logiikka {
         System.out.print("Valitse sarake, välillä A-J: ");
         String valittuKirjain = lukija.nextLine();
         
-        while (!(valittavatKirjaimet.contains(valittuKirjain))) {
+        valittuKirjain = valittuKirjain.toUpperCase();
+        
+        while (!valittavatKirjaimet.contains(valittuKirjain) || valittuKirjain.length() != 1) {
             
-            System.out.print("Valitsemasi kirjain ei ole pyydetyllä välillä tai se on kirjoitettu pienellä. Valitse uudestaan: ");
+            System.out.print("Valitsemasi kirjain ei ole pyydetyllä välillä. Valitse uudestaan: ");
             valittuKirjain = lukija.nextLine();
             
         }
@@ -25,18 +27,20 @@ public class Logiikka {
     } 
     
     public Integer kyseleRivi() { //Kysyy pelaajalta rivin
+        int valittuNumero = Integer.MAX_VALUE;
         
-        System.out.print("Valitse rivi, välillä 0-9: ");
-        int valittuNumero = Integer.parseInt(lukija.nextLine());
-        
-        while (! (valittuNumero >= 0 && valittuNumero < 10) ) {
+        while (! (valittuNumero >= 0 && valittuNumero < 10 )) {
             
-            System.out.print("Valitsemasi numero ei ole pyydetyllä välillä, koitetaas uudestaan: ");
-            valittuNumero = Integer.parseInt(lukija.nextLine());           
+            System.out.print("Valitse rivi, välillä 0-9: ");
+            
+            try {
+                valittuNumero = Integer.parseInt(lukija.nextLine());
+            } catch (NumberFormatException e) {
+                System.err.println("Ei ollut numero, kirjoita uudestaan");
+            }
         }
         
         return valittuNumero;
-        
     }
     
     public void kyseleNimi(Pelaaja pelaaja){

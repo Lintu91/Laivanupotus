@@ -35,12 +35,10 @@
     <version>1.1.4</version>
     <configuration>
         <targetClasses>
-            <param>Laivanupotus.logiikka.*</param>
-            <param>Laivanupotus.pelilauta.*</param>
+            <param>laivanupotus.*</param>
         </targetClasses>
         <targetTests>
-            <param>Laivanupotus.Logiikka.*</param>
-            <param>Laivanupotus.Pelilauta.*</param>
+            <param>laivanupotus.*</param>
         </targetTests>
     </configuration>
 </plugin>
