@@ -61,7 +61,7 @@ public class Peli {
         vastustaja = new Pelaaja();
         int kierroksia = 0;
 
-        while (true) { //Tämä osa ei ole vielä toiminnassa
+        while (true) { 
 
             if ((kierroksia % 2) == 0) {
 
@@ -96,12 +96,5 @@ public class Peli {
     
     public void nimiValittu(String nimi) {
         pelaaja.setNimi(nimi);
-    }
-    
-    public void kirjainValittu(String kirjain){
-        
-    }
-    public void numeroValittu(Integer numero){
-        
     }
 }

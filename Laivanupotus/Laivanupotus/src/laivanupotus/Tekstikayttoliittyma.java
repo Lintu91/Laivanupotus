@@ -16,11 +16,14 @@ public class Tekstikayttoliittyma {
     }
     
     public void kysyNimi(int pelaajaNro){
+        
         System.out.print("Pelaaja" + pelaajaNro + ", millä nimellä haluat sinua kutsuttavan? : ");
         String nimi = lukija.nextLine();
+        
         peli.nimiValittu(nimi);
     }
     public void asetaLaiva(Pelaaja pelaaja, Laiva laiva){
+        
         System.out.println("Pelaaja " + pelaaja.getNimi() + ", aseta " + laiva.getNimi() + " ruudulle!");
                     String kirjain = kysyKirjain();
                     int numero = kysyNumero();
