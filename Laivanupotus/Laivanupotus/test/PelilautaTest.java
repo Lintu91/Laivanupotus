@@ -176,10 +176,49 @@ public class PelilautaTest {
         
         Pelilauta pelilauta = new Pelilauta();
         Laiva laiva = new Laiva(1, "Sukellusvene");
-        pelilauta.lisaaLaiva(laiva,  "D", 3, "V");
+        pelilauta.lisaaLaiva(laiva, "D", 3, "V");
         pelilauta.ammuRuutuun("D", 3);
         int vastaus = pelilauta.getListaSize();
         
+        assertEquals(0, vastaus);
+    }
+    
+    @Test
+    public void ammuRuutuunToimii(){
+        Pelilauta pelilauta = new Pelilauta();
+        Laiva laiva = new Laiva(2, "Hävittäjä");
+        pelilauta.lisaaLaiva(laiva, "D", 3, "A");
+        pelilauta.ammuRuutuun("D", 3);
+        int vastaus = laiva.getElinvoima();
+        
         assertEquals(1, vastaus);
+    }
+    @Test
+    public void sanomaKunHuti(){
+        Pelilauta pelilauta = new Pelilauta();
+        Laiva laiva = new Laiva(2, "Hävittäjä");
+        pelilauta.lisaaLaiva(laiva, "D", 3, "A");
+        int vastaus = pelilauta.ammuRuutuun("E", 3);
+        
+        assertEquals(0, vastaus);
+    }
+    @Test 
+    public void sanomaKunOsuma(){
+        Pelilauta pelilauta = new Pelilauta();
+        Laiva laiva = new Laiva(2, "Hävittäjä");
+        pelilauta.lisaaLaiva(laiva, "D", 3, "A");
+        int vastaus = pelilauta.ammuRuutuun("D", 4);
+        
+        assertEquals(1, vastaus);
+    }
+    @Test
+    public void sanomaKunUpposi(){
+        Pelilauta pelilauta = new Pelilauta();
+        Laiva laiva = new Laiva(2, "Hävittäjä");
+        pelilauta.lisaaLaiva(laiva, "D", 3, "A");
+        pelilauta.ammuRuutuun("D", 4);
+        int vastaus = pelilauta.ammuRuutuun("D", 3);
+        
+        assertEquals(2, vastaus);
     }
 }

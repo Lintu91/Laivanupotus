@@ -33,6 +33,13 @@ public class Laiva {
         return this.elinvoima;
     }
     
+    public Integer getSarake() {
+        return this.sarake;
+    }
+    public Integer getRivi() {
+        return this.rivi;
+    }
+    
     public void asetuLaudalle(Integer sarake,Integer rivi,String suunta){
         
         this.sarake=sarake;
@@ -67,9 +74,9 @@ public class Laiva {
         }
         else if(suunta.equals("Y")) {
             
-            if (rivi == this.rivi){
+            if (sarake == this.sarake){
                 
-                if (rivi >= this.rivi && rivi <= this.rivi + this.pituus){
+                if (rivi <= this.rivi && rivi >= this.rivi + this.pituus){
                     
                     return true;
                 }
@@ -80,9 +87,9 @@ public class Laiva {
         }
         else if(suunta.equals("A")) {
             
-            if (rivi == this.rivi){
+            if (sarake == this.sarake){
                 
-                if (rivi <= this.rivi && rivi >= this.rivi + this.pituus){
+                if (rivi >= this.rivi && rivi <= this.rivi + this.pituus){
                     
                     return true;
                 }

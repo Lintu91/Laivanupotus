@@ -12,17 +12,19 @@ public class Peli {
     Scanner lukija = new Scanner(System.in);
 
     Logiikka logiikka = new Logiikka();
-    Tekstikayttoliittyma tekstis = new Tekstikayttoliittyma();
+    Tekstikayttoliittyma tekstis;
     public void AloitaPeli() {
         
         pelaaja1 = new Pelaaja();
         pelaaja2 = new Pelaaja();
+        
+        tekstis = new Tekstikayttoliittyma(this);
 
         tekstis.tervehdi();
-        tekstis.kysyEkaNimi();
-        logiikka.kyseleNimi(pelaaja1);
-        tekstis.kysyTokaNimi();
-        logiikka.kyseleNimi(pelaaja2);
+        pelaaja = pelaaja1;
+        tekstis.kysyNimi(1);
+        pelaaja = pelaaja2;
+        tekstis.kysyNimi(2);
 
         for (int i = 0; i < 2; i++) { //Tämä osio on lähes valmis, toimiva ja buginen!
 
@@ -52,45 +54,8 @@ public class Peli {
                         laiva = new Laiva(1, "Sukellusvene");
                     }
 
-                    System.out.println("Pelaaja " + pelaaja.getNimi() + ", aseta " + laiva.getNimi() + " ruudulle!");
-                    tekstis.kysyKirjain();
-                    while (!logiikka.kyseleSarake(pelaaja)){
-                        tekstis.valittuKirjainError();
-                    }
-                    tekstis.kysyNumero();
-                    while (!logiikka.kyseleRivi(pelaaja)){
-                        tekstis.valittuKirjainError();
-                    }
-                                    
-                    while (pelaaja.getPelilauta().onkoRuutuVarattu(pelaaja.getKirjain(), pelaaja.getNumero())) {
-
-                        tekstis.ruutuOnVarattu();
-                        tekstis.kysyKirjain();
-                        while (!logiikka.kyseleSarake(pelaaja)){
-                            tekstis.valittuKirjainError();
-                        }
-                        tekstis.kysyNumero();
-                        while (!logiikka.kyseleRivi(pelaaja)) {
-                            tekstis.kysyNumero();
-                        }
-                            
-                    }
-
-                    tekstis.ilmoitaValittuRuutu(pelaaja);
-
-                    tekstis.kysySuunta();
-
-                    String suunta = lukija.nextLine();
-
-                    while (pelaaja.getPelilauta().lisaaLaiva(laiva, pelaaja.getKirjain(), pelaaja.getNumero(), suunta) == false) { 
-
-                        tekstis.valitseUusiSuunta();
-                        suunta = lukija.nextLine();
-                    }
-
-                    tekstis.laivanAsettaminenOnnistui();
+                    tekstis.asetaLaiva(pelaaja, laiva);
                 }
-
             }
         }
 
@@ -101,12 +66,12 @@ public class Peli {
 
             if ((kierroksia % 2) == 0) {
 
-                pelaaja = pelaaja2;
-                vastustaja = pelaaja1;
-            } else {
-
                 pelaaja = pelaaja1;
                 vastustaja = pelaaja2;
+            } else {
+
+                pelaaja = pelaaja2;
+                vastustaja = pelaaja1;
             }
 
             tekstis.mihinAmmutaan(pelaaja);
@@ -120,11 +85,11 @@ public class Peli {
             }
            // valittuNumero = logiikka.kyseleRivi();
 
-            pelaaja.getPelilauta().ammuRuutuun(pelaaja.getKirjain(), pelaaja.getNumero());
+            vastustaja.getPelilauta().ammuRuutuun(pelaaja.getKirjain(), pelaaja.getNumero());
 
             kierroksia++;
 
-            if (pelaaja.getPelilauta().viimeinenLaivaUpotettu() == true) {
+            if (vastustaja.getPelilauta().viimeinenLaivaUpotettu() == true) {
                 break;
             }
         }
@@ -139,5 +104,16 @@ public class Peli {
 
         System.out.println("Peli päättyi, voittaja on " + pelaaja.getNimi() + "! Onneksi olkoon!");
         System.out.println("Pelivuoroja kertyi " + kierroksia + "kpl");
+    }
+    
+    public void nimiValittu(String nimi) {
+        logiikka.asetaNimi(pelaaja, nimi);
+    }
+    
+    public void kirjainValittu(String kirjain){
+        
+    }
+    public void numeroValittu(Integer numero){
+        
     }
 }

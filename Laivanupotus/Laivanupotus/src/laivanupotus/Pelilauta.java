@@ -162,8 +162,9 @@ public class Pelilauta {
     }
 
     public boolean lisaaLaiva(Laiva laiva, String sarake, Integer rivi, String suunta) { //Lisää laivan pelaajan laivalistaan
-
+        int sarakeInt = kirjaimet.indexOf(sarake);
         if (varaaTilaa(sarake, rivi, laiva.getPituus(), suunta)) {
+            laiva.asetuLaudalle(sarakeInt, rivi, suunta);
             pelaajanLaivat.add(laiva);
             return true;
         }
@@ -185,23 +186,24 @@ public class Pelilauta {
         return false;
     }
     
-    public void ammuRuutuun(String sarake, Integer rivi){
+    public Integer ammuRuutuun(String sarake, Integer rivi){
         
         int indeksi = kirjaimet.indexOf(sarake);
         
         for (int i = 0; i < pelaajanLaivat.size(); i++) {
             
             Laiva laiva = pelaajanLaivat.get(i);
-            
             if (laiva.onRuudussa(indeksi, rivi)) {
-                
                 laiva.osuma();
                 
                 if (laiva.getElinvoima()==0) {
                      upotaLaiva(laiva);
+                     return 2;
                 }
+                return 1;
             }
         }
+        return 0;
     }
     
     public Integer getListaSize(){

@@ -45,9 +45,7 @@ public class Logiikka {
         return true;
     }
     
-    public void kyseleNimi(Pelaaja pelaaja){
-        String nimi = lukija.nextLine();
-        
+    public void asetaNimi(Pelaaja pelaaja, String nimi){
         pelaaja.setNimi(nimi);
     }
     
