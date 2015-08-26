@@ -11,7 +11,6 @@ public class Peli {
 
     Scanner lukija = new Scanner(System.in);
 
-    Logiikka logiikka = new Logiikka();
     Tekstikayttoliittyma tekstis;
     public void AloitaPeli() {
         
@@ -74,18 +73,7 @@ public class Peli {
                 vastustaja = pelaaja1;
             }
 
-            tekstis.mihinAmmutaan(pelaaja);
-            tekstis.kysyKirjain();
-            while (!logiikka.kyseleSarake(pelaaja)){
-                tekstis.valittuKirjainError();
-            }
-            tekstis.kysyNumero();
-            while (!logiikka.kyseleRivi(pelaaja)){
-                tekstis.valittuNumeroError();
-            }
-           // valittuNumero = logiikka.kyseleRivi();
-
-            vastustaja.getPelilauta().ammuRuutuun(pelaaja.getKirjain(), pelaaja.getNumero());
+            tekstis.ammuRuutuun(pelaaja, vastustaja);
 
             kierroksia++;
 
@@ -107,7 +95,7 @@ public class Peli {
     }
     
     public void nimiValittu(String nimi) {
-        logiikka.asetaNimi(pelaaja, nimi);
+        pelaaja.setNimi(nimi);
     }
     
     public void kirjainValittu(String kirjain){

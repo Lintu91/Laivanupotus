@@ -9,6 +9,12 @@ public class Graafinenkayttoliittyma implements Runnable{
 
     private JFrame frame;
     
+    private Logiikka logiikka;
+    
+    public Graafinenkayttoliittyma(Logiikka logiikka) {
+        this.logiikka = logiikka;
+    }
+    
     @Override
     public void run() {
         frame = new JFrame("Kyllä me selvitään!");

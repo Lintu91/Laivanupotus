@@ -125,6 +125,6 @@ public class Tekstikayttoliittyma {
          System.out.println("Laivan asettaminen onnistui!");
     }
     public void mihinAmmutaan(Pelaaja pelaaja){
-        System.out.println(pelaaja.getNimi() + " , mihin ruutuun haluat ampua?");
+        System.out.println(pelaaja.getNimi() + ", mihin ruutuun haluat ampua?");
     }
 }

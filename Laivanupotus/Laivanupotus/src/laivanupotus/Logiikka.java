@@ -5,7 +5,6 @@ import java.util.Scanner;
 public class Logiikka {
     
     Scanner lukija = new Scanner(System.in);
-    Graafinenkayttoliittyma kayttoliittyma = new Graafinenkayttoliittyma();
     int laivanPituus;
     Pelaaja pelaaja;
     
