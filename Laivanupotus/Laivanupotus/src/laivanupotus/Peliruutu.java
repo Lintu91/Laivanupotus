@@ -10,6 +10,6 @@ package laivanupotus;
  *
  * @author hennapet
  */
-public class PeliRuutu {
+public class Peliruutu {
     
 }

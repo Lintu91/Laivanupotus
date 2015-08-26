@@ -1,7 +1,5 @@
 
 package laivanupotus;
-import java.util.HashMap;
-import java.util.ArrayList;
 import java.util.Scanner;
 
 public class Pelaaja {
@@ -19,6 +17,12 @@ public class Pelaaja {
                                                                       // eli sarakkeen ja rivin  
         nykyinenKirjain = kirjain;
         nykyinenNumero = numero;
+    }
+    public void setKirjain(String kirjain){
+        nykyinenKirjain = kirjain;
+    }
+    public void setNumero(Integer numero){
+        nykyinenNumero=numero;
     }
   
     public String getKirjain() { //Palauttaa pelaajan valitseman kirjaimen, eli sarakkeen

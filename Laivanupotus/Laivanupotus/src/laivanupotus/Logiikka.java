@@ -5,42 +5,44 @@ import java.util.Scanner;
 public class Logiikka {
     
     Scanner lukija = new Scanner(System.in);
-    GraafinenKayttoliittyma kayttoliittyma = new GraafinenKayttoliittyma();
+    Graafinenkayttoliittyma kayttoliittyma = new Graafinenkayttoliittyma();
     int laivanPituus;
+    Pelaaja pelaaja;
     
-    public String kyseleSarake() { //Kysyy pelaajalta sarakkeen
+    public boolean kyseleSarake(Pelaaja pelaaja) { //Kysyy pelaajalta sarakkeen
         
         String valittavatKirjaimet = "ABCDEFGHIJ";
-        System.out.print("Valitse sarake, välillä A-J: ");
+        
         String valittuKirjain = lukija.nextLine();
         
         valittuKirjain = valittuKirjain.toUpperCase();
         
         while (!valittavatKirjaimet.contains(valittuKirjain) || valittuKirjain.length() != 1) {
-            
-            System.out.print("Valitsemasi kirjain ei ole pyydetyllä välillä. Valitse uudestaan: ");
-            valittuKirjain = lukija.nextLine();
+                        
+            return false;
             
         }
-        return valittuKirjain;
+        pelaaja.setKirjain(valittuKirjain);
+        return true;
         
     } 
     
-    public Integer kyseleRivi() { //Kysyy pelaajalta rivin
+    public boolean kyseleRivi(Pelaaja pelaaja) { //Kysyy pelaajalta rivin
         int valittuNumero = Integer.MAX_VALUE;
         
         while (! (valittuNumero >= 0 && valittuNumero < 10 )) {
             
-            System.out.print("Valitse rivi, välillä 0-9: ");
+            
             
             try {
                 valittuNumero = Integer.parseInt(lukija.nextLine());
             } catch (NumberFormatException e) {
                 System.err.println("Ei ollut numero, kirjoita uudestaan");
+                return false;
             }
         }
-        
-        return valittuNumero;
+        pelaaja.setNumero(valittuNumero);
+        return true;
     }
     
     public void kyseleNimi(Pelaaja pelaaja){

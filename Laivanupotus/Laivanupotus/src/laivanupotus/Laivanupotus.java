@@ -6,7 +6,7 @@ public class Laivanupotus {
     
     public static void main(String[] args) {
         Peli peli = new Peli();
-        GraafinenKayttoliittyma kayttis = new GraafinenKayttoliittyma();
+        Graafinenkayttoliittyma kayttis = new Graafinenkayttoliittyma();
         SwingUtilities.invokeLater(kayttis);
         peli.AloitaPeli();  //Let the game begin!
         

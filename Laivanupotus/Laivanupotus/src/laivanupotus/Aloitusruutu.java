@@ -8,9 +8,9 @@ import java.awt.event.ActionEvent;
 import javax.swing.JOptionPane;
 
 
-public class AloitusRuutu extends JPanel{
+public class Aloitusruutu extends JPanel{
     
-    public AloitusRuutu(final JFrame frame){
+    public Aloitusruutu(final JFrame frame){
         JButton nappula = new JButton("Lol toimiiko xD");
         nappula.addActionListener(new ActionListener() {
 

@@ -11,19 +11,17 @@ public class Peli {
 
     Scanner lukija = new Scanner(System.in);
 
-    String valittuKirjain;
-    int valittuNumero = 0;
     Logiikka logiikka = new Logiikka();
-
+    Tekstikayttoliittyma tekstis = new Tekstikayttoliittyma();
     public void AloitaPeli() {
         
         pelaaja1 = new Pelaaja();
         pelaaja2 = new Pelaaja();
 
-        System.out.println("Tervetuloa pelaamaan Laivanupotusta!");
-        System.out.print("Pelaaja 1, millä nimellä haluat sinua kutsuttavan? : ");
+        tekstis.tervehdi();
+        tekstis.kysyEkaNimi();
         logiikka.kyseleNimi(pelaaja1);
-        System.out.print("Pelaaja 2, millä nimellä haluat sinua kutsuttavan? : ");
+        tekstis.kysyTokaNimi();
         logiikka.kyseleNimi(pelaaja2);
 
         for (int i = 0; i < 2; i++) { //Tämä osio on lähes valmis, toimiva ja buginen!
@@ -55,32 +53,42 @@ public class Peli {
                     }
 
                     System.out.println("Pelaaja " + pelaaja.getNimi() + ", aseta " + laiva.getNimi() + " ruudulle!");
+                    tekstis.kysyKirjain();
+                    while (!logiikka.kyseleSarake(pelaaja)){
+                        tekstis.valittuKirjainError();
+                    }
+                    tekstis.kysyNumero();
+                    while (!logiikka.kyseleRivi(pelaaja)){
+                        tekstis.valittuKirjainError();
+                    }
+                                    
+                    while (pelaaja.getPelilauta().onkoRuutuVarattu(pelaaja.getKirjain(), pelaaja.getNumero())) {
 
-                    valittuKirjain = logiikka.kyseleSarake();
-                    valittuNumero = logiikka.kyseleRivi();
-
-                    while (pelaaja.getPelilauta().onkoRuutuVarattu(valittuKirjain, valittuNumero)) {
-
-                        System.out.println("Valittu ruutu on varattu, valitse uudestaan!");
-                        valittuKirjain = logiikka.kyseleSarake();
-                        valittuNumero = logiikka.kyseleRivi();
+                        tekstis.ruutuOnVarattu();
+                        tekstis.kysyKirjain();
+                        while (!logiikka.kyseleSarake(pelaaja)){
+                            tekstis.valittuKirjainError();
+                        }
+                        tekstis.kysyNumero();
+                        while (!logiikka.kyseleRivi(pelaaja)) {
+                            tekstis.kysyNumero();
+                        }
+                            
                     }
 
-                    pelaaja.setKirjainJaNumero(valittuKirjain, valittuNumero);
+                    tekstis.ilmoitaValittuRuutu(pelaaja);
 
-                    System.out.println("Valitsit ruudun " + pelaaja.getKirjain() + pelaaja.getNumero());
-
-                    System.out.print("Mihin suuntaan haluat laivan? V=vasen, O=oikea, Y=ylös, A=alas: ");
+                    tekstis.kysySuunta();
 
                     String suunta = lukija.nextLine();
 
-                    while (pelaaja.getPelilauta().lisaaLaiva(laiva, valittuKirjain, valittuNumero, suunta) == false) { //Tama on muuttamassa joskus
+                    while (pelaaja.getPelilauta().lisaaLaiva(laiva, pelaaja.getKirjain(), pelaaja.getNumero(), suunta) == false) { 
 
-                        System.out.print("Ei kelpaa, valitse uusi suunta: ");
+                        tekstis.valitseUusiSuunta();
                         suunta = lukija.nextLine();
                     }
 
-                    System.out.println("Laivan asettaminen onnistui!");
+                    tekstis.laivanAsettaminenOnnistui();
                 }
 
             }
@@ -101,11 +109,18 @@ public class Peli {
                 vastustaja = pelaaja2;
             }
 
-            System.out.println("Pelaaja, mihin ruutuun haluat ampua?");
-            valittuKirjain = logiikka.kyseleSarake();
-            valittuNumero = logiikka.kyseleRivi();
+            tekstis.mihinAmmutaan(pelaaja);
+            tekstis.kysyKirjain();
+            while (!logiikka.kyseleSarake(pelaaja)){
+                tekstis.valittuKirjainError();
+            }
+            tekstis.kysyNumero();
+            while (!logiikka.kyseleRivi(pelaaja)){
+                tekstis.valittuNumeroError();
+            }
+           // valittuNumero = logiikka.kyseleRivi();
 
-            pelaaja.getPelilauta().ammuRuutuun(valittuKirjain, valittuNumero);
+            pelaaja.getPelilauta().ammuRuutuun(pelaaja.getKirjain(), pelaaja.getNumero());
 
             kierroksia++;
 
