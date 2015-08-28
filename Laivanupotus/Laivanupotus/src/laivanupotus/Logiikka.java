@@ -4,48 +4,63 @@ import java.util.Scanner;
 
 public class Logiikka {
     
-    Scanner lukija = new Scanner(System.in);
-    int laivanPituus;
-    Pelaaja pelaaja;
+    Pelaaja pelaaja1 = new Pelaaja();
+    Pelaaja pelaaja2 = new Pelaaja();
+    Pelaaja vastustaja = null;
+    Pelaaja pelaaja = null;
+    int status = 0;
     
-    public boolean kyseleSarake(Pelaaja pelaaja) { //Kysyy pelaajalta sarakkeen
-        
-        String valittavatKirjaimet = "ABCDEFGHIJ";
-        
-        String valittuKirjain = lukija.nextLine();
-        
-        valittuKirjain = valittuKirjain.toUpperCase();
-        
-        while (!valittavatKirjaimet.contains(valittuKirjain) || valittuKirjain.length() != 1) {
-                        
-            return false;
-            
-        }
-        pelaaja.setKirjain(valittuKirjain);
-        return true;
-        
-    } 
+    private LaivanasetusLogiikka llogiikka = new LaivanasetusLogiikka();
+    private TaisteluLogiikka tlogiikka = new TaisteluLogiikka();
     
-    public boolean kyseleRivi(Pelaaja pelaaja) { //Kysyy pelaajalta rivin
-        int valittuNumero = Integer.MAX_VALUE;
-        
-        while (! (valittuNumero >= 0 && valittuNumero < 10 )) {
-            
-            
-            
-            try {
-                valittuNumero = Integer.parseInt(lukija.nextLine());
-            } catch (NumberFormatException e) {
-                System.err.println("Ei ollut numero, kirjoita uudestaan");
-                return false;
-            }
-        }
-        pelaaja.setNumero(valittuNumero);
-        return true;
+    public LaivanasetusLogiikka annaLaivanasetusLogiikka(){
+        return llogiikka;
     }
     
-    public void asetaNimi(Pelaaja pelaaja, String nimi){
-        pelaaja.setNimi(nimi);
+    public TaisteluLogiikka annaTaisteluLogiikka(){
+        return tlogiikka;
+    }
+    public int annaStatus(){
+        return status;
+    }
+    
+    public Logiikka() {
+        vastustaja = pelaaja2;
+        pelaaja = pelaaja1;
+    }
+    
+    public void vuoronvaihto(){
+        
+        
+        if (pelaaja == pelaaja1){
+            vastustaja= pelaaja1;
+            pelaaja = pelaaja2;
+        } else {
+            vastustaja = pelaaja2;
+            pelaaja = pelaaja1;
+        }
+        
+        if(status == 0) {
+            if (llogiikka.vuoronvaihto()){
+                status=1;
+            }
+        }
+        else {
+            if(tlogiikka.vuoronvaihto()) {
+                status = 2;
+            }
+        }
+    }
+    public Pelaaja annaPelaaja(){
+        return pelaaja;
+    }
+    
+    public Pelaaja annaVastustaja(){
+        return vastustaja;
+    }
+    
+    public void siirryPeliin(){
+        status = 1;
     }
     
     

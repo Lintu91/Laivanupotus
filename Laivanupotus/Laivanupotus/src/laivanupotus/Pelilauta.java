@@ -5,6 +5,7 @@ import java.util.ArrayList;
 public class Pelilauta {
 
     boolean[][] ruudut = new boolean[10][10];
+    boolean[][] ammututRuudut = new boolean[10][10];
     String kirjaimet = "ABCDEFGHIJ";
     int laivanPituus;
     ArrayList<Laiva> pelaajanLaivat = new ArrayList<>();
@@ -30,10 +31,7 @@ public class Pelilauta {
         laivanPituus = pituus;
     }
 
-    public boolean varaaTilaa(String kirjain, Integer numero, Integer pituus, String suunta) { //Varaa tilaa laivalle
-
-        int sarake = kirjaimet.indexOf(kirjain);
-
+    public boolean varaaTilaa(Integer sarake, Integer numero, Integer pituus, String suunta) {
         if (suunta.equals("V")) {
 
             if (varaaTilaaVasemmalle(sarake, numero, pituus)) {
@@ -64,12 +62,17 @@ public class Pelilauta {
 
         return false;
     }
+    public boolean varaaTilaa(String kirjain, Integer numero, Integer pituus, String suunta) { //Varaa tilaa laivalle
+
+        int sarake = kirjaimet.indexOf(kirjain);
+        return varaaTilaa(sarake, numero, pituus, suunta);
+    }
 
     public boolean varaaTilaaVasemmalle(Integer sarake, Integer numero, Integer pituus) { //Varaa laivalle tilaa vasemmalle, jos mahdollista
 
         int laivanPituus = pituus;
 
-        if (sarake - pituus < 0) {
+        if (sarake - pituus < -1) {
             return false;
         }
 
@@ -115,7 +118,7 @@ public class Pelilauta {
 
     public boolean varaaTilaaYlos(Integer sarake, Integer numero, Integer pituus) { //Varaa laivalle tilaa ylös, jos mahdollista
 
-        if (numero - pituus < 0) {
+        if (numero - pituus < -1) {
             return false;
         }
 
@@ -123,15 +126,15 @@ public class Pelilauta {
 
             int nykyinenRivi = numero - i;
 
-            if (onkoRuutuVarattu(nykyinenRivi, numero)) {
+            if (onkoRuutuVarattu(sarake, nykyinenRivi)) {
                 return false;
             }
         }
 
         for (int i = 0; i < pituus; i++) {
 
-            int nykyinenRivi = sarake - i;
-            varaaRuutu(nykyinenRivi, numero);
+            int nykyinenRivi = numero - i;
+            varaaRuutu(sarake, nykyinenRivi);
         }
 
         return true;
@@ -147,7 +150,7 @@ public class Pelilauta {
 
             int nykyinenRivi = numero + i;
 
-            if (onkoRuutuVarattu(nykyinenRivi, numero)) {
+            if (onkoRuutuVarattu(sarake, nykyinenRivi)) {
                 return false;
             }
         }
@@ -155,7 +158,7 @@ public class Pelilauta {
         for (int i = 0; i < pituus; i++) {
 
             int nykyinenRivi = numero + i;
-            varaaRuutu(nykyinenRivi, numero);
+            varaaRuutu(sarake, nykyinenRivi);
         }
 
         return true;
@@ -163,8 +166,12 @@ public class Pelilauta {
 
     public boolean lisaaLaiva(Laiva laiva, String sarake, Integer rivi, String suunta) { //Lisää laivan pelaajan laivalistaan
         int sarakeInt = kirjaimet.indexOf(sarake);
+        return lisaaLaiva(laiva, sarakeInt, rivi, suunta);
+    }
+    
+    public boolean lisaaLaiva(Laiva laiva, Integer sarake, Integer rivi, String suunta){
         if (varaaTilaa(sarake, rivi, laiva.getPituus(), suunta)) {
-            laiva.asetuLaudalle(sarakeInt, rivi, suunta);
+            laiva.asetuLaudalle(sarake, rivi, suunta);
             pelaajanLaivat.add(laiva);
             return true;
         }
@@ -186,14 +193,16 @@ public class Pelilauta {
         return false;
     }
     
-    public Integer ammuRuutuun(String sarake, Integer rivi){
-        
-        int indeksi = kirjaimet.indexOf(sarake);
-        
+    public boolean onkoRuutuunAmmuttu(Integer sarake, Integer rivi){
+        return ammututRuudut[sarake][rivi];
+    }
+    
+    public Integer ammuRuutuun(Integer sarake, Integer rivi){
+        ammututRuudut[sarake][rivi]=true;
         for (int i = 0; i < pelaajanLaivat.size(); i++) {
             
             Laiva laiva = pelaajanLaivat.get(i);
-            if (laiva.onRuudussa(indeksi, rivi)) {
+            if (laiva.onRuudussa(sarake, rivi)) {
                 laiva.osuma();
                 
                 if (laiva.getElinvoima()==0) {
@@ -204,6 +213,11 @@ public class Pelilauta {
             }
         }
         return 0;
+    }
+    public Integer ammuRuutuun(String sarake, Integer rivi){
+        
+        int indeksi = kirjaimet.indexOf(sarake);
+        return ammuRuutuun(indeksi,rivi);
     }
     
     public Integer getListaSize(){

@@ -23,7 +23,8 @@ public class Graafinenkayttoliittyma implements Runnable{
         frame.getContentPane().setLayout(new GridLayout(1,2));
         Aloitusruutu aloitus = new Aloitusruutu(frame);
         frame.getContentPane().add(aloitus);
-        Karttanakyma kartta = new Karttanakyma();
+        Karttanakyma kartta = new Karttanakyma(logiikka);
+        kartta.rakennaKarttaLaivanAsetus();
         frame.getContentPane().add(kartta);
         frame.pack();
         frame.setVisible(true);
