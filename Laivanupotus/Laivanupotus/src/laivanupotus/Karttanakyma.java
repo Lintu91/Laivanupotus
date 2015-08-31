@@ -67,6 +67,15 @@ public class Karttanakyma extends JPanel {
                         @Override
                         public void actionPerformed(ActionEvent e) {
                             lauta.ammuRuutuun(sarake, rivi);
+                            for (int k = 0; k < 10; k++) {
+                                for (int l = 0; l < 10; l++) {
+                                    if (lauta.onkoRuutuVarattu(k, l)){
+                                        taulukko[k][l].setText("O");
+                                    } else {
+                                        taulukko[k][l].setText("X");
+                                    }
+                                }
+                            }
                             logiikka.vuoronvaihto();
                             rakennaKarttaAmpuminen();
                         }

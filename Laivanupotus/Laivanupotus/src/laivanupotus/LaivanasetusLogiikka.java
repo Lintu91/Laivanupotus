@@ -5,7 +5,9 @@ public class LaivanasetusLogiikka {
     private boolean vuorovaihdettu=false;
     private int laivaNyt = 4;
     private int laivojaLaitettavaksi = 1;
+    
     public boolean vuoronvaihto(){
+        
         laivaNyt = 4;
         laivojaLaitettavaksi = 1;
         if (vuorovaihdettu){
@@ -34,6 +36,7 @@ public class LaivanasetusLogiikka {
             laiva = new Laiva(1, "Sukellusvene");
         }
         laivojaLaitettavaksi--;
+        
         if(laivojaLaitettavaksi == 0) {
             laivaNyt--;
             laivojaLaitettavaksi = 5 - laivaNyt;

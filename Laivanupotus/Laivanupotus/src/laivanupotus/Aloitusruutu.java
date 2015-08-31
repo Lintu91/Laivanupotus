@@ -24,6 +24,7 @@ public class Aloitusruutu extends JPanel{
             @Override
             public void actionPerformed(ActionEvent e) {
                 JOptionPane.showMessageDialog(frame, "Toimii näemmä! Loistoo!");
+                
             }
             
         });
