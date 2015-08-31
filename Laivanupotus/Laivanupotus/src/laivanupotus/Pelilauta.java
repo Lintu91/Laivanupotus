@@ -184,7 +184,6 @@ public class Pelilauta {
     }
 
     public boolean viimeinenLaivaUpotettu() { //Jos pelaajan kaikki laivat on upotettu, peli päättyy
-
         if (pelaajanLaivat.isEmpty()) {
 
             return true;
@@ -195,6 +194,18 @@ public class Pelilauta {
     
     public boolean onkoRuutuunAmmuttu(Integer sarake, Integer rivi){
         return ammututRuudut[sarake][rivi];
+    }
+    
+    public Laiva annaLaivaJokaOnRuudussa(Integer sarake, Integer rivi) {
+        for (int i = 0; i < pelaajanLaivat.size(); i++) {
+            
+            Laiva laiva = pelaajanLaivat.get(i);
+            if (laiva.onRuudussa(sarake, rivi)) {
+                return laiva;
+            }
+        }
+        
+        return null;
     }
     
     public Integer ammuRuutuun(Integer sarake, Integer rivi){

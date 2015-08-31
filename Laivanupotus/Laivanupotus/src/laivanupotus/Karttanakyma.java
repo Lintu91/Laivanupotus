@@ -2,25 +2,30 @@
 package laivanupotus;
 
 import java.awt.Component;
+import java.awt.Dimension;
 import java.awt.GridLayout;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import javax.swing.JButton;
+import javax.swing.JFrame;
 import javax.swing.JLabel;
 import javax.swing.JOptionPane;
 import javax.swing.JPanel;
+import javax.swing.WindowConstants;
 
 public class Karttanakyma extends JPanel {
     private JButton[][] taulukko = new JButton[10][10];
     private String[] suuntavaihtoehdot = {"V", "O", "A" , "Y"};
     Graafinenkayttoliittyma gLiittyma;
     Logiikka logiikka;
+    JFrame frame;
     
     public Karttanakyma(Logiikka logiikka, Graafinenkayttoliittyma gLiittyma){
         this.logiikka = logiikka;
         this.gLiittyma = gLiittyma;
         
         this.setLayout(new GridLayout(11,11));
+        
         for (int i = 0; i < 11; i++) {
             for (int j = 0; j < 11; j++) {
                 if(i == 0 && j == 0) {
@@ -41,7 +46,14 @@ public class Karttanakyma extends JPanel {
             }
         }
     }
+    
+    public void ekaVuoro(){
+        rakennaKarttaLaivanAsetus();
+        
+        JOptionPane.showMessageDialog(this, "Sinun vuorosi, " + logiikka.annaPelaaja().getNimi());
+    }
     public void rakennaKarttaAmpuminen(){
+        putsaaKartta();
         
         for (int i = 0; i < 10; i++) {
             for (int j = 0; j < 10; j++) {
@@ -49,44 +61,79 @@ public class Karttanakyma extends JPanel {
                 final JButton nappi = taulukko[j][i];
                 final int sarake = j;
                 final int rivi = i;
-                nappi.setText("");
-                for(ActionListener al : nappi.getActionListeners()) {
-                    nappi.removeActionListener(al);
-                }
                 final Pelilauta lauta = logiikka.annaVastustaja().getPelilauta();
                 if (lauta.onkoRuutuunAmmuttu(sarake, rivi)){
                     if (lauta.onkoRuutuVarattu(sarake, rivi)){
-                        nappi.setText("O");
+                        Laiva l = lauta.annaLaivaJokaOnRuudussa(sarake, rivi);
+                        if(l != null && l.getElinvoima() == 0) {
+                            nappi.setText("-");
+                        }
+                        else {
+                            nappi.setText("O");
+                        }
                     } else {
                         nappi.setText("X");
                     }
                     
                 } else {
-                    nappi.addActionListener(new ActionListener() {
-
-                        @Override
-                        public void actionPerformed(ActionEvent e) {
-                            lauta.ammuRuutuun(sarake, rivi);
-                            for (int k = 0; k < 10; k++) {
-                                for (int l = 0; l < 10; l++) {
-                                    if (lauta.onkoRuutuVarattu(k, l)){
-                                        taulukko[k][l].setText("O");
-                                    } else {
-                                        taulukko[k][l].setText("X");
-                                    }
-                                }
-                            }
-                            logiikka.vuoronvaihto();
-                            rakennaKarttaAmpuminen();
-                        }
-
-                    });
+                    ampumisnappi(nappi, lauta, sarake, rivi);
                 }
             }
         }
     }
     
+    private void putsaaKartta() {
+        for (int i = 0; i < 10; i++) {
+            for (int j = 0; j < 10; j++) {
+                
+                final JButton nappi = taulukko[j][i];
+                putsaaNappi(nappi);
+            }
+        }
+    }
+    private void putsaaNappi(JButton nappi) {
+        nappi.setText("");
+        for(ActionListener al : nappi.getActionListeners()) {
+            nappi.removeActionListener(al);
+        }
+    }
+    
+    private void ampumisnappi(JButton nappi, final Pelilauta lauta, final Integer sarake, final Integer rivi){
+        final Karttanakyma kartta = this;
+                    nappi.addActionListener(new ActionListener() {
+
+                        @Override
+                        public void actionPerformed(ActionEvent e) {
+                            int tapahtuma = lauta.ammuRuutuun(sarake, rivi);
+                            
+                            if (tapahtuma==0){
+                                gLiittyma.paivitaInforuutu(logiikka.annaPelaaja().getNimi() + ": Huti! Lol! N00b!");
+                            }
+                            else if (tapahtuma == 1){
+                                gLiittyma.paivitaInforuutu(logiikka.annaPelaaja().getNimi() + ": Osuma!");
+                            } else {
+                                gLiittyma.paivitaInforuutu(logiikka.annaPelaaja().getNimi() + ": Osui ja upposi!");
+                            }
+                                                      
+                            if (logiikka.annaTaisteluLogiikka().kaikkiLaivatUpotettu(logiikka.annaVastustaja())){
+                                JOptionPane.showMessageDialog(kartta,logiikka.annaPelaaja().getNimi() + ", voitit pelin");
+                                System.exit(0);
+                            }
+                            
+                            vuoronvaihto();
+                            rakennaKarttaAmpuminen();
+                        }
+
+                    });
+    }
+    public void vuoronvaihto() {
+        logiikka.vuoronvaihto();
+        putsaaKartta();
+        JOptionPane.showMessageDialog(this, "Sinun vuorosi, " + logiikka.annaPelaaja().getNimi());
+    }
+    
     public void rakennaKarttaLaivanAsetus(){
+        putsaaKartta();
         
         for (int i = 0; i < 10; i++) {
             
@@ -95,10 +142,6 @@ public class Karttanakyma extends JPanel {
                 final JButton nappi = taulukko[j][i];
                 final int sarake = j;
                 final int rivi = i;
-                nappi.setText("");
-                for(ActionListener al : nappi.getActionListeners()) {
-                    nappi.removeActionListener(al);
-                }
                 
                 Pelilauta lauta = logiikka.annaPelaaja().getPelilauta();
                 
@@ -110,10 +153,7 @@ public class Karttanakyma extends JPanel {
 
                         @Override
                         public void actionPerformed(ActionEvent e) {
-                            String suunta = kysySuunta();
-                            if(suunta != null) {
-                                asetaLaiva(nappi, sarake, rivi, suunta);
-                            }
+                            asetaLaiva(nappi, sarake, rivi);
                         }
 
                     });
@@ -126,17 +166,29 @@ public class Karttanakyma extends JPanel {
         String suunta = (String)JOptionPane.showInputDialog(this, "Valitse suunta", "Suunnan valinta", JOptionPane.PLAIN_MESSAGE, null, suuntavaihtoehdot, null);
         return suunta;
     }
+    public void toiminnanSeuraus(){
+        
+    }
     
     private Laiva nykyinenLaiva = null;
-    public void asetaLaiva(JButton nappi, int sarake, int rivi, String suunta){
+    public void asetaLaiva(JButton nappi, int sarake, int rivi){
         if(nykyinenLaiva == null) {
             nykyinenLaiva = logiikka.annaLaivanasetusLogiikka().annaLaiva();
+        }
+        
+        String suunta = "V";
+        if(nykyinenLaiva.getPituus() > 1) {
+            suunta = kysySuunta();
+        }
+        
+        if(suunta == null) {
+            return;
         }
         
         if(logiikka.annaPelaaja().getPelilauta().lisaaLaiva(nykyinenLaiva, sarake, rivi, suunta)) {
             nykyinenLaiva = null;
             if(logiikka.annaLaivanasetusLogiikka().kaikkiLaivatLaitettu()) {
-                logiikka.vuoronvaihto();
+                vuoronvaihto();
             }
         }
         

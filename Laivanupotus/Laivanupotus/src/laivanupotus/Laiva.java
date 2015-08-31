@@ -53,7 +53,7 @@ public class Laiva {
             
             if(rivi == this.rivi) {
                 
-                if(sarake <= this.sarake && sarake >= this.sarake - this.pituus) {
+                if(sarake <= this.sarake && sarake > this.sarake - this.pituus) {
                     return true;
                 }
                 
@@ -64,7 +64,7 @@ public class Laiva {
             
             if (rivi == this.rivi) { 
                 
-                if (sarake >= this.sarake && sarake <= this.sarake + this.pituus) {
+                if (sarake >= this.sarake && sarake < this.sarake + this.pituus) {
                     return true;
                 }
                 
@@ -76,7 +76,7 @@ public class Laiva {
             
             if (sarake == this.sarake){
                 
-                if (rivi <= this.rivi && rivi >= this.rivi + this.pituus){
+                if (rivi <= this.rivi && rivi > this.rivi - this.pituus){
                     
                     return true;
                 }
@@ -89,7 +89,7 @@ public class Laiva {
             
             if (sarake == this.sarake){
                 
-                if (rivi >= this.rivi && rivi <= this.rivi + this.pituus){
+                if (rivi >= this.rivi && rivi < this.rivi + this.pituus){
                     
                     return true;
                 }
