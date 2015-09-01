@@ -15,7 +15,7 @@ import javax.swing.WindowConstants;
 
 public class Karttanakyma extends JPanel {
     private JButton[][] taulukko = new JButton[10][10];
-    private String[] suuntavaihtoehdot = {"V", "O", "A" , "Y"};
+    private String[] suuntavaihtoehdot = {"Vasen", "Oikea", "Alas" , "Ylös"};
     Graafinenkayttoliittyma gLiittyma;
     Logiikka logiikka;
     JFrame frame;
@@ -62,10 +62,15 @@ public class Karttanakyma extends JPanel {
                 final int sarake = j;
                 final int rivi = i;
                 final Pelilauta lauta = logiikka.annaVastustaja().getPelilauta();
+                
                 if (lauta.onkoRuutuunAmmuttu(sarake, rivi)){
+                    
                     if (lauta.onkoRuutuVarattu(sarake, rivi)){
+                        
                         Laiva l = lauta.annaLaivaJokaOnRuudussa(sarake, rivi);
+                        
                         if(l != null && l.getElinvoima() == 0) {
+                            
                             nappi.setText("-");
                         }
                         else {
@@ -164,7 +169,18 @@ public class Karttanakyma extends JPanel {
     
     public String kysySuunta() {
         String suunta = (String)JOptionPane.showInputDialog(this, "Valitse suunta", "Suunnan valinta", JOptionPane.PLAIN_MESSAGE, null, suuntavaihtoehdot, null);
-        return suunta;
+        if (suunta!=null){
+            if (suunta.equals("Vasen")){
+                return "V";
+            } else if (suunta.equals("Oikea")) {
+                return "O";
+            } else if (suunta.equals("Ylös")) {
+                return "Y";
+            } else if (suunta.equals("Alas")){
+                return "A";
+            }
+        }
+        return null;
     }
     public void toiminnanSeuraus(){
         

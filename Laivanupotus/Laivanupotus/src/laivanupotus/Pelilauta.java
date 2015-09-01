@@ -178,29 +178,28 @@ public class Pelilauta {
         return false;
     }
 
-    public void upotaLaiva(Laiva laiva) { //Poistaa laivan pelaajan laivalistasta
-
-        pelaajanLaivat.remove(laiva);
-    }
-
     public boolean viimeinenLaivaUpotettu() { //Jos pelaajan kaikki laivat on upotettu, peli päättyy
-        if (pelaajanLaivat.isEmpty()) {
-
-            return true;
+        
+        for (int i = 0; i < pelaajanLaivat.size(); i++) {
+            if (pelaajanLaivat.get(i).getElinvoima() > 0){
+                return false;
+            }
         }
-
-        return false;
+        return true;
     }
     
     public boolean onkoRuutuunAmmuttu(Integer sarake, Integer rivi){
+        
         return ammututRuudut[sarake][rivi];
     }
     
     public Laiva annaLaivaJokaOnRuudussa(Integer sarake, Integer rivi) {
+        
         for (int i = 0; i < pelaajanLaivat.size(); i++) {
             
             Laiva laiva = pelaajanLaivat.get(i);
             if (laiva.onRuudussa(sarake, rivi)) {
+                
                 return laiva;
             }
         }
@@ -209,6 +208,7 @@ public class Pelilauta {
     }
     
     public Integer ammuRuutuun(Integer sarake, Integer rivi){
+        
         ammututRuudut[sarake][rivi]=true;
         for (int i = 0; i < pelaajanLaivat.size(); i++) {
             
@@ -217,7 +217,6 @@ public class Pelilauta {
                 laiva.osuma();
                 
                 if (laiva.getElinvoima()==0) {
-                     upotaLaiva(laiva);
                      return 2;
                 }
                 return 1;
