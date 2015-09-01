@@ -46,7 +46,7 @@ public class Logiikka {
             }
         }
         else {
-            if(tlogiikka.vuoronvaihto()) {
+            if(tlogiikka.vuoronvaihto()) { //Ei tarvita, olkoot
                 status = 2;
             }
         }

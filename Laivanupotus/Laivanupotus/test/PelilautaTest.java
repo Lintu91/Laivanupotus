@@ -178,9 +178,9 @@ public class PelilautaTest {
         Laiva laiva = new Laiva(1, "Sukellusvene");
         pelilauta.lisaaLaiva(laiva, "D", 3, "V");
         pelilauta.ammuRuutuun("D", 3);
-        int vastaus = pelilauta.getListaSize();
+        boolean vastaus = pelilauta.viimeinenLaivaUpotettu();
         
-        assertEquals(0, vastaus);
+        assertEquals(true, vastaus);
     }
     
     @Test
