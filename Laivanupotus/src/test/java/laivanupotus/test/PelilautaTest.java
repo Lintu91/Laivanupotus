@@ -1,3 +1,5 @@
+package laivanupotus.test;
+
 
 import laivanupotus.Laiva;
 import laivanupotus.Pelilauta;

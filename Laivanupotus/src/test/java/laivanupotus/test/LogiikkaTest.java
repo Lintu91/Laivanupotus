@@ -1,3 +1,5 @@
+package laivanupotus.test;
+
 import laivanupotus.Logiikka;
 import laivanupotus.Pelaaja;
 import org.junit.After;

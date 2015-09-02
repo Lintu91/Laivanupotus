@@ -1,3 +1,4 @@
+package laivanupotus.test;
 
 import laivanupotus.Laiva;
 import org.junit.After;

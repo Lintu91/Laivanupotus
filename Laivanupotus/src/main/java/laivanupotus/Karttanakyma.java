@@ -71,7 +71,7 @@ public class Karttanakyma extends JPanel {
                         
                         if(l != null && l.getElinvoima() == 0) {
                             
-                            nappi.setText("-");
+                            nappi.setText("Z");
                         }
                         else {
                             nappi.setText("O");
