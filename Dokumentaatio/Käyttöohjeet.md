@@ -1,1 +1,1 @@
-# Tulossa
+# Käyttöohjeet löytyvät pelistä, napin 'Help' alla!
