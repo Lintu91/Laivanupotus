@@ -14,12 +14,12 @@ public class Laiva {
         this.elinvoima=pituus;
     }
 
-    public String getNimi() { //palauttaa laivan nimen pituuden perusteella
+    public String getNimi() { //Ehkä nää get-metodit on selkeitä
 
         return this.nimi;
     }
     
-    public Integer getPituus(){
+    public Integer getPituus(){ 
         return this.pituus;
     }
     
@@ -40,14 +40,14 @@ public class Laiva {
         return this.rivi;
     }
     
-    public void asetuLaudalle(Integer sarake,Integer rivi,String suunta){
+    public void asetuLaudalle(Integer sarake,Integer rivi,String suunta){ //Laiva tiedostaa paikkansa laudalla
         
         this.sarake=sarake;
         this.rivi=rivi;
         this.suunta=suunta;
     }
     
-    public boolean onRuudussa(Integer sarake, Integer rivi){
+    public boolean onRuudussa(Integer sarake, Integer rivi){ //Jos laiva on kysytyssä ruudussa, palautetaan True
         
         if(suunta.equals("V")) {
             

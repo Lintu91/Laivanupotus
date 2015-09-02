@@ -234,5 +234,6 @@ public class Pelilauta {
         
         return pelaajanLaivat.size();
     }
+    
 
 }

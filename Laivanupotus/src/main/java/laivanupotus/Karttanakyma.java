@@ -47,12 +47,13 @@ public class Karttanakyma extends JPanel {
         }
     }
     
-    public void ekaVuoro(){
+    public void ekaVuoro(){ //Aloittaa ensimmäisen vuoron
+        
         rakennaKarttaLaivanAsetus();
         
-        JOptionPane.showMessageDialog(this, "Sinun vuorosi, " + logiikka.annaPelaaja().getNimi());
+        JOptionPane.showMessageDialog(this, "Sinun vuorosi, " + logiikka.annaPelaaja().getNimi() + "!");
     }
-    public void rakennaKarttaAmpuminen(){
+    public void rakennaKarttaAmpuminen(){ //Rakentaa ampumiskartan
         putsaaKartta();
         
         for (int i = 0; i < 10; i++) {
@@ -87,7 +88,7 @@ public class Karttanakyma extends JPanel {
         }
     }
     
-    private void putsaaKartta() {
+    private void putsaaKartta() { //Kartta tyhjenee symboleista
         for (int i = 0; i < 10; i++) {
             for (int j = 0; j < 10; j++) {
                 
@@ -96,14 +97,14 @@ public class Karttanakyma extends JPanel {
             }
         }
     }
-    private void putsaaNappi(JButton nappi) {
+    private void putsaaNappi(JButton nappi) { //Napit tyhjenevät symboleista tarvittaessa
         nappi.setText("");
         for(ActionListener al : nappi.getActionListeners()) {
             nappi.removeActionListener(al);
         }
     }
     
-    private void ampumisnappi(JButton nappi, final Pelilauta lauta, final Integer sarake, final Integer rivi){
+    private void ampumisnappi(JButton nappi, final Pelilauta lauta, final Integer sarake, final Integer rivi){ //Luo napit peliruudulle
         final Karttanakyma kartta = this;
                     nappi.addActionListener(new ActionListener() {
 
@@ -112,16 +113,17 @@ public class Karttanakyma extends JPanel {
                             int tapahtuma = lauta.ammuRuutuun(sarake, rivi);
                             
                             if (tapahtuma==0){
-                                gLiittyma.paivitaInforuutu(logiikka.annaPelaaja().getNimi() + ": Huti! Lol! N00b!");
+                                gLiittyma.paivitaInforuutu(logiikka.annaPelaaja().getNimi() + ": Huti!");
                             }
                             else if (tapahtuma == 1){
                                 gLiittyma.paivitaInforuutu(logiikka.annaPelaaja().getNimi() + ": Osuma!");
                             } else {
                                 gLiittyma.paivitaInforuutu(logiikka.annaPelaaja().getNimi() + ": Osui ja upposi!");
+                                
                             }
                                                       
                             if (logiikka.annaTaisteluLogiikka().kaikkiLaivatUpotettu(logiikka.annaVastustaja())){
-                                JOptionPane.showMessageDialog(kartta,logiikka.annaPelaaja().getNimi() + ", voitit pelin");
+                                JOptionPane.showMessageDialog(kartta,logiikka.annaPelaaja().getNimi() + ", voitit pelin!");
                                 System.exit(0);
                             }
                             
@@ -131,13 +133,13 @@ public class Karttanakyma extends JPanel {
 
                     });
     }
-    public void vuoronvaihto() {
+    public void vuoronvaihto() { //Vaihtaa vuoron kutsuttaessa
         logiikka.vuoronvaihto();
         putsaaKartta();
-        JOptionPane.showMessageDialog(this, "Sinun vuorosi, " + logiikka.annaPelaaja().getNimi());
+        JOptionPane.showMessageDialog(this, "Sinun vuorosi, " + logiikka.annaPelaaja().getNimi() + "!");
     }
     
-    public void rakennaKarttaLaivanAsetus(){
+    public void rakennaKarttaLaivanAsetus(){ //Rakentaa laivanasetuskartan
         putsaaKartta();
         
         for (int i = 0; i < 10; i++) {
@@ -167,7 +169,7 @@ public class Karttanakyma extends JPanel {
         }
     }
     
-    public String kysySuunta() {
+    public String kysySuunta() { //Kysyy pelaajalta mihin suuntaan haluaa laivan jatkuvan
         String suunta = (String)JOptionPane.showInputDialog(this, "Valitse suunta", "Suunnan valinta", JOptionPane.PLAIN_MESSAGE, null, suuntavaihtoehdot, null);
         if (suunta!=null){
             if (suunta.equals("Vasen")){
@@ -182,12 +184,10 @@ public class Karttanakyma extends JPanel {
         }
         return null;
     }
-    public void toiminnanSeuraus(){
-        
-    }
     
     private Laiva nykyinenLaiva = null;
-    public void asetaLaiva(JButton nappi, int sarake, int rivi){
+    
+    public void asetaLaiva(JButton nappi, int sarake, int rivi){ //Tallettaa laivan tiedot asetuksen jälkeen
         if(nykyinenLaiva == null) {
             nykyinenLaiva = logiikka.annaLaivanasetusLogiikka().annaLaiva();
         }

@@ -38,20 +38,15 @@ public class Graafinenkayttoliittyma implements Runnable{
         aloitus.add(tekstikentta);
     }
     
-    public void aloitaPeli() {
+    public void aloitaPeli() { //Pelin aloitus
         aloitus.aloita();
         kartta.ekaVuoro();
     }
     
-    public void paivitaInforuutu(String viesti){
+    public void paivitaInforuutu(String viesti){ //Päivittää inforuutua kun pelissä tapahtuu jotain
         String vanhaViesti = tekstikentta.getText();
-        tekstikentta.setText("Vuoro " + logiikka.annaTaisteluLogiikka().getVuorojenMaara() + ": " + viesti + "\n");
+        tekstikentta.setText("Vuoro " + logiikka.annaTaisteluLogiikka().getVuorojenMaara() + ", Pelaaja " + viesti + "\n");
         tekstikentta.append(vanhaViesti);
     }
-    
-    
-    
    
-    
-    
 }

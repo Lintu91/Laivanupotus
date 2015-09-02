@@ -223,4 +223,36 @@ public class PelilautaTest {
         
         assertEquals(2, vastaus);
     }
+    @Test
+    public void josRuutuunJoAmmuttuPalauttaaTrue(){
+        Pelilauta pelilauta = new Pelilauta();
+        pelilauta.ammuRuutuun(4, 4);
+        boolean vastaus = pelilauta.onkoRuutuunAmmuttu(4, 4);
+        
+        assertEquals(true, vastaus);
+    }
+    
+    @Test
+    public void josRuutuunEiAmmuttuPalauttaaTrue(){
+        Pelilauta pelilauta = new Pelilauta();
+        boolean vastaus = pelilauta.onkoRuutuunAmmuttu(4, 4);
+        
+        assertEquals(false, vastaus);
+    }
+    @Test 
+    public void josRuudussaEiLaivaaPalauttaaFalse(){
+        Pelilauta pelilauta = new Pelilauta();
+        Laiva vastaus = pelilauta.annaLaivaJokaOnRuudussa(4, 4);
+        
+        assertEquals(null, vastaus);
+    }
+    @Test 
+    public void josRuudussaLaivaPalauttaaLaivan(){
+        Pelilauta pelilauta = new Pelilauta();
+        Laiva laiva = new Laiva(1, "Sukellusvene");
+        pelilauta.lisaaLaiva(laiva, 4, 4, "O");
+        Laiva vastaus = pelilauta.annaLaivaJokaOnRuudussa(4, 4);
+        
+        assertEquals(laiva, vastaus);
+    }
 }

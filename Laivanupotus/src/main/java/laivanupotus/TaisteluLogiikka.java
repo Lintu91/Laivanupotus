@@ -2,8 +2,10 @@
 package laivanupotus;
 
 public class TaisteluLogiikka {
+    
     private Pelaaja pelaaja;
     private int vuorojenMaara = 1;
+    
     public TaisteluLogiikka(){
         
     }

@@ -6,7 +6,7 @@ public class LaivanasetusLogiikka {
     private int laivaNyt = 4;
     private int laivojaLaitettavaksi = 1;
     
-    public boolean vuoronvaihto(){
+    public boolean vuoronvaihto(){ //Antaa luvan vuoronvaihdolle
         
         laivaNyt = 4;
         laivojaLaitettavaksi = 1;
@@ -17,10 +17,12 @@ public class LaivanasetusLogiikka {
             return false;
         }
     }
-    public boolean kaikkiLaivatLaitettu() {
+    public boolean kaikkiLaivatLaitettu() { //Ilmoittaa onko pelaajalla vielä asetettavia laivoja
+        
         return laivaNyt == 0;
     }
-    public Laiva annaLaiva(){
+    
+    public Laiva annaLaiva(){ //antaa nykyisen laivan
         Laiva laiva = null;
         
         if(laivaNyt == 4) {
