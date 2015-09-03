@@ -7,16 +7,12 @@ import javax.swing.JPanel;
 import java.awt.event.ActionListener;
 import java.awt.event.ActionEvent;
 import javax.swing.JOptionPane;
-import java.awt.TextArea;
-import java.awt.TextComponent;
 import java.io.File;
 import javax.sound.sampled.AudioFormat;
 import javax.sound.sampled.AudioInputStream;
 import javax.sound.sampled.AudioSystem;
 import javax.sound.sampled.Clip;
 import javax.sound.sampled.DataLine;
-import javax.swing.JScrollPane;
-import javax.swing.JTextArea;
 
 public class Aloitusruutu extends JPanel{
     private final Logiikka logiikka;
@@ -63,8 +59,10 @@ public class Aloitusruutu extends JPanel{
         helppi.addActionListener(new ActionListener(){
 
             @Override
-            public void actionPerformed(ActionEvent e) {
+            public void actionPerformed(ActionEvent e) {  //Peliohjeet
                 JOptionPane.showMessageDialog(frame, "Tervetuloa pelaamaan peliä Laivanupotus!\n"
+                        + "\n"
+                        + "Kuten varmaan jo huomasit, taustalla soi iloinen, tunnelmaa luova musiikki. Voit toki halutessasi ottaa sen pois päältä napista 'Vaimenna!'.\n"
                         + "\n"
                         + "Laivanupotus on kahden pelaajan pelattava peli, jossa tavoitteena on upottaa vastustajan laivasto.\n"
                         + "Napilla 'Exit' ja 'Kyllä' voit lopettaa pelin milloin vain halutessasi. Painamalla nappia 'Aloita!' pääset aloittamaan pelin!\n"
@@ -87,6 +85,7 @@ public class Aloitusruutu extends JPanel{
                         + "- O          = Ruutuun on ammuttu ja siinä on osa laivasta joka ei ole vielä uponnut. Kannattaa ampua viereisiin ruutuihin!\n"
                         + "- Z          = Kyseisessä ruudussa on laiva joka on uponnut.\n"
                         + "\n"
+                        + "Painamalla nappia 'Pelistatus' voit pelin aikana katsoa pelitilanteen. Ikkuna kertoo montako laivaa kummallakin pelaajalla on jäljellä."
                         + "Peli päättyy kun jomman kumman koko laivasto on upotettu. Peli ilmoittaa tällöin voittajan voittosiirron jälkeen.\n"
                         + "\n"
                         + "Onnea peliin!"
@@ -141,7 +140,7 @@ public class Aloitusruutu extends JPanel{
         kysyPelaajienNimet(logiikka.pelaaja2);
         
     }
-     public void playSound(String filename){
+     public void playSound(String filename){ //Soittaa pelin taustalla musiikkia
         try {
             File yourFile = new File(filename);
             AudioInputStream stream;
@@ -157,7 +156,7 @@ public class Aloitusruutu extends JPanel{
             clip.loop(100);
         }
         catch (Exception e) {
-            //whatevers
+            
             e.printStackTrace();
         }
     }

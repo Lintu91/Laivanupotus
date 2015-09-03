@@ -48,11 +48,11 @@ public class Pelaaja {
         
         return pelilauta;
     }
-    public Integer laivojaJaljella(){
+    public Integer laivojaJaljella(){ //Kertoo montako laivaa pelaajalla on pelilaudalla
         return status;
     }
     
-    public void vahennaLaiva(){
+    public void vahennaLaiva(){ //Vähentää pelaajan laivan kun sellainen upotetaan
         status--;
     }
     

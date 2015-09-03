@@ -68,16 +68,19 @@ public class PelaajaTest {
         
         assertEquals(true, vastaus);
     }
-    
     @Test
-    public void lisaaLaivanListaanOikein(){
+    public void laivojaOnAluksiKymmenen(){
+        Pelaaja pelaaja = new Pelaaja();
+        int vastaus = pelaaja.laivojaJaljella();
         
-        
+        assertEquals(10, vastaus);
     }
-//    
-    @Test
-    public void poistaaLaivanListasta(){ 
+    @Test 
+    public void laivojenMaaraVaheneeOikein(){
+        Pelaaja pelaaja = new Pelaaja();
+        pelaaja.vahennaLaiva();
+        int vastaus = pelaaja.laivojaJaljella();
         
-        
+        assertEquals(9, vastaus);
     }
 }
