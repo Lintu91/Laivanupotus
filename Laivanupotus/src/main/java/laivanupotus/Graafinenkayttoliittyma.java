@@ -2,12 +2,15 @@
 package laivanupotus;
 import java.awt.Dimension;
 import java.awt.GridLayout;
+import java.awt.event.ActionEvent;
+import java.awt.event.ActionListener;
 import java.io.File;
 import javax.sound.sampled.AudioFormat;
 import javax.sound.sampled.AudioInputStream;
 import javax.sound.sampled.AudioSystem;
 import javax.sound.sampled.Clip;
 import javax.sound.sampled.DataLine;
+import javax.swing.JButton;
 import javax.swing.JFrame;
 import javax.swing.JTextArea;
 import javax.swing.WindowConstants;
@@ -22,10 +25,10 @@ public class Graafinenkayttoliittyma implements Runnable{
     private Aloitusruutu aloitus;
     private Karttanakyma kartta;
     
+    
     public Graafinenkayttoliittyma(Logiikka logiikka) {
         this.logiikka = logiikka;
         
-        playSound("musa.wav");
         
     }
     
@@ -56,25 +59,5 @@ public class Graafinenkayttoliittyma implements Runnable{
         tekstikentta.append(vanhaViesti);
     }
     
-    public void playSound(String filename){
-        try {
-            File yourFile = new File(filename);
-            AudioInputStream stream;
-            AudioFormat format;
-            DataLine.Info info;
-            Clip clip;
-
-            stream = AudioSystem.getAudioInputStream(yourFile);
-            format = stream.getFormat();
-            info = new DataLine.Info(Clip.class, format);
-            clip = (Clip) AudioSystem.getLine(info);
-            clip.open(stream);
-            clip.start();
-            clip.loop(100);
-        }
-        catch (Exception e) {
-            //whatevers
-            e.printStackTrace();
-        }
-    }
+   
 }

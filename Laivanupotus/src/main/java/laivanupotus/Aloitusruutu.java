@@ -9,13 +9,34 @@ import java.awt.event.ActionEvent;
 import javax.swing.JOptionPane;
 import java.awt.TextArea;
 import java.awt.TextComponent;
+import java.io.File;
+import javax.sound.sampled.AudioFormat;
+import javax.sound.sampled.AudioInputStream;
+import javax.sound.sampled.AudioSystem;
+import javax.sound.sampled.Clip;
+import javax.sound.sampled.DataLine;
 import javax.swing.JScrollPane;
 import javax.swing.JTextArea;
 
 public class Aloitusruutu extends JPanel{
     private final Logiikka logiikka;
+    private Clip clip;
+    JButton mute = new JButton("Vaimenna!");
     
     public Aloitusruutu(final JFrame frame,final Graafinenkayttoliittyma kayttis, final Logiikka logiikka){
+        playSound("musa.wav");
+        mute.addActionListener(new ActionListener () {
+            
+            @Override
+            public void actionPerformed(ActionEvent e) {
+                if (clip.isRunning()) {
+                    clip.stop();
+                } else {
+                    clip.start();
+                }
+            }
+   
+        });
         this.logiikka = logiikka;
         
         this.setLayout(new BorderLayout());
@@ -96,6 +117,7 @@ public class Aloitusruutu extends JPanel{
         
         
         JPanel panel = new JPanel();
+        panel.add(mute);
         panel.add(nappula);
         panel.add(status);
         panel.add(helppi);
@@ -119,4 +141,25 @@ public class Aloitusruutu extends JPanel{
         kysyPelaajienNimet(logiikka.pelaaja2);
         
     }
+     public void playSound(String filename){
+        try {
+            File yourFile = new File(filename);
+            AudioInputStream stream;
+            AudioFormat format;
+            DataLine.Info info;
+
+            stream = AudioSystem.getAudioInputStream(yourFile);
+            format = stream.getFormat();
+            info = new DataLine.Info(Clip.class, format);
+            clip = (Clip) AudioSystem.getLine(info);
+            clip.open(stream);
+            clip.start();
+            clip.loop(100);
+        }
+        catch (Exception e) {
+            //whatevers
+            e.printStackTrace();
+        }
+    }
+    
 }
