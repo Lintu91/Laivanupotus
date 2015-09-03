@@ -118,6 +118,7 @@ public class Karttanakyma extends JPanel {
                             else if (tapahtuma == 1){
                                 gLiittyma.paivitaInforuutu(logiikka.annaPelaaja().getNimi() + ": Osuma!");
                             } else {
+                                logiikka.annaVastustaja().vahennaLaiva();
                                 gLiittyma.paivitaInforuutu(logiikka.annaPelaaja().getNimi() + ": Osui ja upposi!");
                                 
                             }

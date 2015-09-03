@@ -8,6 +8,7 @@ public class Pelaaja {
     String nykyinenKirjain;
     int nykyinenNumero;
     String nimi;
+    int status = 10;
     Pelilauta pelilauta = new Pelilauta();
     
     public Pelaaja(){
@@ -47,6 +48,12 @@ public class Pelaaja {
         
         return pelilauta;
     }
+    public Integer laivojaJaljella(){
+        return status;
+    }
     
+    public void vahennaLaiva(){
+        status--;
+    }
     
 }

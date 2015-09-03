@@ -21,6 +21,7 @@ public class Aloitusruutu extends JPanel{
         this.setLayout(new BorderLayout());
         JButton nappula = new JButton("Exit");      
         JButton helppi = new JButton("Help");
+        JButton status = new JButton("Pelistatus");
         JButton aloitus = new JButton("Aloita Peli!");
         
         nappula.addActionListener(new ActionListener() {
@@ -72,17 +73,31 @@ public class Aloitusruutu extends JPanel{
             }
             
         });
+        final Aloitusruutu a = this;
         aloitus.addActionListener(new ActionListener(){
 
             @Override
             public void actionPerformed(ActionEvent e) {
+                if (moneskoPelaaja>2){
+                    JOptionPane.showMessageDialog(a, "Peli on kesken! Jos kuitenkin haluat aloittaa uuden pelin, klikkaa 'Exit', sitten 'Kyllä'.");
+                } else {
                 kayttis.aloitaPeli();
             }
-            
+            }
         });
+        status.addActionListener(new ActionListener(){
+
+            @Override
+            public void actionPerformed(ActionEvent e) {
+                JOptionPane.showMessageDialog(frame, "Pelaajalla " + logiikka.pelaaja1.getNimi() +" on "+ logiikka.pelaaja1.laivojaJaljella() + " laivaa.\n"
+                        + "Pelaajalla " + logiikka.pelaaja2.getNimi()+ " on " + logiikka.pelaaja2.laivojaJaljella() + " laivaa.");
+            }
+        });
+        
         
         JPanel panel = new JPanel();
         panel.add(nappula);
+        panel.add(status);
         panel.add(helppi);
         panel.add(aloitus);
         this.add(panel, BorderLayout.SOUTH);
@@ -99,11 +114,9 @@ public class Aloitusruutu extends JPanel{
     }
     
     public void aloita() { //aloittaa pelin kun pelaaja painaa nappia 'Aloita!'
-        if (moneskoPelaaja>2){
-            JOptionPane.showMessageDialog(this, "Peli on kesken! Jos kuitenkin haluat aloittaa uuden pelin, klikkaa 'Exit', sitten 'Kyllä'.");
-        } else {
-            kysyPelaajienNimet(logiikka.pelaaja1);
-            kysyPelaajienNimet(logiikka.pelaaja2);
-        }
+        
+        kysyPelaajienNimet(logiikka.pelaaja1);
+        kysyPelaajienNimet(logiikka.pelaaja2);
+        
     }
 }
