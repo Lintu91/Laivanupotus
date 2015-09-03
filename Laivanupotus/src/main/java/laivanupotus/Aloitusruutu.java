@@ -20,7 +20,7 @@ public class Aloitusruutu extends JPanel{
     JButton mute = new JButton("Vaimenna!");
     
     public Aloitusruutu(final JFrame frame,final Graafinenkayttoliittyma kayttis, final Logiikka logiikka){
-        playSound("musa.wav");
+        playSound("musa.wav"); //https://www.youtube.com/watch?v=qwKZ2J7ZnQo
         mute.addActionListener(new ActionListener () {
             
             @Override
